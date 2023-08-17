@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/logo/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="./css/owfont-regular.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>momentum</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+      </div>
+      <figure>
+        <figcaption class="name-song"></figcaption>
+        <div class="progress-bar-audio">
+        <div class="progressed"></div>
+        </div>
+      </figure>
+      <ul class="play-list">
+        <li class="play-item"><audio src="./assets/sounds/Aqua Caelestis.mp3" class="play-audio"></audio>Aqua Caelestis</li>
+        <li class="play-item"><audio src="./assets/sounds/River Flows In You.mp3" class="play-audio" ></audio>River Flows In You</li>
+        <li class="play-item"><audio src="./assets/sounds/Summer Wind.mp3" class="play-audio"></audio >Summer Wind</li>
+        <li class="play-item"><audio src="./assets/sounds/Ennio Morricone.mp3" class="play-audio"></audio>Ennio Morricone</li>
+      </ul>
+     <!-- <button class="lang-switcher en"></button> -->
+    </div>
+    <div class="weather">
+      <input type="text" class="city" />
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" placeholder="[Enter name]" />
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="quote-block">
+    <button class="change-quote"></button>
+    <div>
+      <div class="quote"></div>
+      <div class="author"></div>
+    </div>
+  </div>
+      <ul class="list-footer">
+        <li class="link-footer item-footer">
+          <img
+            src="./assets/logo/github.svg"
+            alt="github-icone"
+            class="icone"
+            width="20"
+            height="20">
+          <a
+            class="item-footer"
+            href="https://github.com/Yana-Dyachok"> My GitHub
+          </a>
+        </li>
+        <li class="item-footer">© 2023</li>
+        <li class="link-footer item-footer ">
+          <a href="https://rs.school/js/">
+            <img
+              src="./assets/logo/rs_school_js.svg"
+              alt="rs-school"
+              class="rs-school-img"
+              width="100"
+              height="50">
+          </a>
+        </li>
+      </ul>
+  </footer>
+  <script type="module" src="./js/index.js"></script>
+</body>
+
+</html>
