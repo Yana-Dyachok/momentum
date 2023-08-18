@@ -52,7 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 120px;
+    width: 200px;
     margin-bottom: 28px;
   }
   
@@ -137,6 +137,14 @@
   .play-next {
     background-image: url("../assets/player-logo/play-next.svg");
   }
+
+  .switch-sound {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: url("../assets/player-logo/free-icon-sound-4225650.png") no-repeat center/cover;
+}
   
   .weather {
     display: flex;
