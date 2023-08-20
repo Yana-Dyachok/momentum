@@ -34,7 +34,7 @@ function showDate() {
 }
 
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
 function getDate(lang) {
@@ -51,6 +51,7 @@ function getDate(lang) {
 
 /*2. Greeting */
 const name = document.querySelector('.name');
+name.placeholder =settings.options.language === 'en'?"[Enter name]" :'[Введіть ім\'я]';
 
 function showGreeting(enDay, ukDay) {
     greeting.textContent =settings.options.language === 'en'? `Good ${enDay}`: ukDay;
@@ -144,11 +145,11 @@ function getLocalStorageCity() {
 const savedCity = getLocalStorageCity();
 
 if (savedCity) {
-    city.value = savedCity;
+    city.value = capitalizeFirstLetter(savedCity);
     getWeather(savedCity);
 } else {
-    city.value = 'Minsk';
-    getWeather('Minsk');
+    city.value =settings.options.language === 'en' ?'Minsk':'Минск'
+    getWeather(city.value);
 }
 
 async function getWeather(cityName) {
@@ -161,7 +162,7 @@ async function getWeather(cityName) {
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
-        wind.textContent = (settings.options.language === 'en' ? 'Wind speed:' : 'Швидкість вітру:') + ` ${Math.floor(data.wind.speed)} m/s`;
+        wind.textContent = (settings.options.language === 'en' ? 'Wind speed:' : 'Швидкість вітру:') + ` ${Math.floor(data.wind.speed)}`+(settings.options.language === 'en' ? 'm/s' : 'м/с');
         humidity.textContent =(settings.options.language === 'en' ?'Humidity:':'Вологість') +` ${Math.floor(data.main.humidity)}%`;
         weatherDescription.textContent = data.weather[0].description;
     } catch (error) {
