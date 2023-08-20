@@ -185,7 +185,7 @@ function getQuoteIndex() {
 }
 
 async function getQuotes() {
-    let res =settings.options.language === 'en'? await fetch('./js/data.json'):await fetch('./js/data.json');
+    let res =settings.options.language === 'en'? await fetch('./js/data.json'):await fetch('./js/datauk.json');
     const data = await res.json();
     const randomQuote = getQuoteIndex();
     const { quote: text, author: authorName } = data[randomQuote];
