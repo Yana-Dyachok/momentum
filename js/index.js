@@ -1,3 +1,17 @@
+let settings = {
+    options: {
+        time: 'true',
+        greeting: 'true',
+        weather: 'true',
+        quote: 'true',
+        player: 'true',
+        language: 'uk',
+        background: 'github',
+        todo: 'true',
+    },
+    tag: ''
+};
+
 /*1. Times and calendar */
 const time = document.querySelector('.time');
 const dateCalendar = document.querySelector('.date');
@@ -6,26 +20,30 @@ const date = new Date();
 
 function showTime() {
     const date = new Date();
-    const currentTime = date.toLocaleTimeString();
-    time.textContent = currentTime;
+    time.textContent= date.toLocaleTimeString();
+    showDate();
     showGreeting();
     setTimeout(showTime, 1000);
-    return currentTime;
 }
 
 showTime();
 
 function showDate() {
-    const currentDate = new Date().toLocaleDateString('en-us', {
+    settings.options.language === 'en'?getDate('en-Us'):getDate('uk-UA');
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getDate(lang) {
+    const currentDate = new Date().toLocaleDateString(lang, {
         weekday: 'long',
         month: 'long',
         day: 'numeric',
     });
-    dateCalendar.textContent = currentDate;
-    return currentDate;
+    dateCalendar.textContent = currentDate.split(' ').map(el=>capitalizeFirstLetter(el)).join(' ');
 }
-
-showDate();
 
 /*2. Greeting */
 
@@ -174,6 +192,7 @@ const playPrev = document.querySelector('.play-prev');
 const play = document.querySelector('.play');
 const playNext = document.querySelector('.play-next');
 const audio = document.querySelector('audio');
+const switchSound=document.querySelector('.switch-sound');
 let isPlay = false;
 let playNum = 0;
 
@@ -187,6 +206,10 @@ function playAudio() {
         audio.pause();
         play.classList.remove('pause');
     }
+}
+
+function toggleSound() {
+switchSound.classList.toggle('off');
 }
 
 function pauseAudio() {
@@ -239,6 +262,7 @@ play.addEventListener('click', toggleBtn);
 playPrev.addEventListener('click', getplayPrev);
 play.addEventListener('click', pauseAudio);
 playNext.addEventListener('click', getplayNext);
+switchSound.addEventListener('click', toggleSound);
 
 import playList from './playlist.js';
 //console.log(playList);

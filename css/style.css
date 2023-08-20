@@ -145,6 +145,10 @@
     border: none;
     background: url("../assets/player-logo/free-icon-sound-4225650.png") no-repeat center/cover;
 }
+
+.switch-sound.off {
+  background: url("../assets/player-logo/free-icon-no-sound-4225646.png") no-repeat center/cover;
+}
   
   .weather {
     display: flex;
