@@ -14,7 +14,7 @@
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     background: url("../assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5);
     background-blend-mode: multiply;
@@ -34,7 +34,7 @@
   .progress-bar-audio {
     width: 170px;
     height: 10px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 20px;
   }
   
@@ -42,10 +42,10 @@
     width:0%;
     height: 10px;
     border-radius:20px;
-    background-color: aqua;
+    background-color: #00ffff;
   }
   .name-song {
-    color: aqua;
+    color: #00ffff;
   }
   
   .player-controls {
@@ -84,7 +84,7 @@
   }
   
   .item-active::before {
-    color: aqua;
+    color: #00ffff;
   }
   
   .player-icon,
@@ -183,16 +183,16 @@
     padding: 5px;
     font-size: 20px;
     line-height: 24px;
-    color: #fff;
+    color: #ffffff;;
     border: 0;
     outline: 0;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ffffff;;
     background-color: transparent;
   }
   
   .city::placeholder {
     font-size: 20px;
-    color: #fff;
+    color: #ffffff;
     opacity: .6;
   }
   
@@ -261,55 +261,17 @@
     padding: 10px;
     font-size: 40px;
     text-align: left;
-    color: #fff;
+    color: #ffffff;
     background-color: transparent;
     border: 0;
     outline: 0;
   }
   
   .name::placeholder {
-    color: #fff;
+    color: #ffffff;
     opacity: .6;
   }
-  
-  .list-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding-top: 40px;
-  }
-  
-  /* .en {
-    position: absolute;
-    left: 0;
-    width: 70px;
-    height: 70px;
-    background-size: 70px 70px;
-    background-image: url("../assets/svg/en.svg");
-  }
-  
-  .ru {
-    position: absolute;
-    left: 0;
-  
-    width: 70px;
-    height: 70px;
-    background-size: 70px 70px;
-    background-image: url("../assets/svg/ru.svg");
-  } */
-  
-  .item-footer {
-    list-style: none;
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  .link-footer:hover {
-    cursor: pointer;
-    transition: box-shadow 0.7s ease-out 0s;
-    background-color: aqua;
-  }
-  
+
   .quote-block {
     display: flex;
     flex-direction: column;
@@ -334,6 +296,31 @@
     min-height: 20px;
   }
   
+  .list-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    padding-top: 40px;
+  }
+   
+  .item-footer {
+    width: 50px;
+    height: 50px;
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .link-footer {
+    filter: drop-shadow(.3125rem .3125rem 1.875rem #76f8f8);
+    cursor: pointer;
+  }
+  
+  .link-footer:hover {
+    filter: drop-shadow(.3125rem .3125rem 1.875rem #eff1f3);
+    transition: box-shadow 0.7s ease-out 0s;
+  }
+
   @media (max-width: 768px) {
     .time {
       min-height: 80px;
