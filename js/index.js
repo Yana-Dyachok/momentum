@@ -5,11 +5,11 @@ let settings = {
         weather: 'true',
         quote: 'true',
         player: 'true',
-        language: 'uk',
+        language: 'en',
         background: 'github',
         todo: 'true',
     },
-    tag: ''
+    tag: '',
 };
 
 /*1. Times and calendar */
@@ -20,7 +20,7 @@ const date = new Date();
 
 function showTime() {
     const date = new Date();
-    time.textContent= date.toLocaleTimeString();
+    time.textContent = date.toLocaleTimeString();
     showDate();
     showGreeting();
     setTimeout(showTime, 1000);
@@ -29,7 +29,7 @@ function showTime() {
 showTime();
 
 function showDate() {
-    settings.options.language === 'en'?getDate('en-Us'):getDate('uk-UA');
+    settings.options.language === 'en' ? getDate('en-Us') : getDate('uk-UA');
 }
 
 function capitalizeFirstLetter(string) {
@@ -42,22 +42,27 @@ function getDate(lang) {
         month: 'long',
         day: 'numeric',
     });
-    dateCalendar.textContent = currentDate.split(' ').map(el=>capitalizeFirstLetter(el)).join(' ');
+    dateCalendar.textContent = currentDate
+        .split(' ')
+        .map((el) => capitalizeFirstLetter(el))
+        .join(' ');
 }
 
 /*2. Greeting */
 
 function showGreeting() {
     const greeting = document.querySelector('.greeting');
-    greeting.textContent = `Good ${getTimeOfDay()}`;
+    greeting.textContent =  settings.options.language === 'en'
+        ? `Good ${getTimeOfDay(`morning`, `afternoon`, `evening`, `night`)}`
+        : getTimeOfDay(`Доброго ранку`, `Доброго дня`, `Доброго вечора`, `Доброї ночі`);
 }
 
-function getTimeOfDay() {
+function getTimeOfDay(morning, afternoon, evening, night) {
     const hours = date.getHours();
-    if (hours >= 6 && hours < 12) return `morning`;
-    if (hours >= 12 && hours < 18) return `afternoon`;
-    if (hours >= 18 && hours < 24) return `evening`;
-    if (hours < 6 && hours >= 0) return `night`;
+    if (hours >= 6 && hours < 12) return morning;
+    if (hours >= 12 && hours < 18) return afternoon;
+    if (hours >= 18 && hours < 24) return evening;
+    if (hours < 6 && hours >= 0) return night;
 }
 
 const name = document.querySelector('.name');
@@ -86,7 +91,7 @@ function getRandomNum() {
 let randomNum = getRandomNum();
 
 function setBackground() {
-    const timeOfDay = getTimeOfDay();
+    const timeOfDay = getTimeOfDay(morning, afternoon, evening, night);
     const bgNum = String(randomNum).padStart(2, '0');
     const img = new Image();
     const path = `https://raw.githubusercontent.com/yana-dyachok/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
@@ -96,7 +101,7 @@ function setBackground() {
     img.src = path;
 }
 
-setBackground();
+//setBackground();
 
 function getSlideNext() {
     if (randomNum < 20) randomNum += 1;
@@ -192,7 +197,7 @@ const playPrev = document.querySelector('.play-prev');
 const play = document.querySelector('.play');
 const playNext = document.querySelector('.play-next');
 const audio = document.querySelector('audio');
-const switchSound=document.querySelector('.switch-sound');
+const switchSound = document.querySelector('.switch-sound');
 let isPlay = false;
 let playNum = 0;
 
@@ -209,7 +214,7 @@ function playAudio() {
 }
 
 function toggleSound() {
-switchSound.classList.toggle('off');
+    switchSound.classList.toggle('off');
 }
 
 function pauseAudio() {
