@@ -105,7 +105,7 @@ function setBackground() {
     img.src = path;
 }
 
-//setBackground();
+setBackground();
 
 function getSlideNext() {
     if (randomNum < 20) randomNum += 1;
@@ -185,7 +185,7 @@ function getQuoteIndex() {
 }
 
 async function getQuotes() {
-    const res = await fetch('./js/data.json');
+    let res =settings.options.language === 'en'? await fetch('./js/data.json'):await fetch('./js/data.json');
     const data = await res.json();
     const randomQuote = getQuoteIndex();
     const { quote: text, author: authorName } = data[randomQuote];
