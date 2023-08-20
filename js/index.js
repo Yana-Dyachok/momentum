@@ -11,6 +11,7 @@ let settings = {
     },
     tag: '',
 };
+
 const greeting = document.querySelector('.greeting');
 /*1. Times and calendar */
 const time = document.querySelector('.time');
@@ -29,7 +30,7 @@ function showTime() {
 showTime();
 
 function showDate() {
-    settings.options.language === 'en' ? getDate('en-Us') : getDate('uk-UA');
+    settings.options.language === 'en'? getDate('en-Us') : getDate('uk-UA');
 }
 
 function capitalizeFirstLetter(string) {
@@ -52,7 +53,7 @@ function getDate(lang) {
 const name = document.querySelector('.name');
 
 function showGreeting(enDay, ukDay) {
-    greeting.textContent =  settings.options.language === 'en'? `Good ${enDay}`: ukDay;
+    greeting.textContent =settings.options.language === 'en'? `Good ${enDay}`: ukDay;
 }
 
 function getTimeOfDay() {
@@ -151,19 +152,21 @@ if (savedCity) {
 }
 
 async function getWeather(cityName) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=en&appid=e15cc81ed311b5889760d37c6251b684&units=metric`;
+    let url =settings.options.language === 'en' 
+    ?`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=en&appid=e15cc81ed311b5889760d37c6251b684&units=metric`
+    :`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=uk&appid=e15cc81ed311b5889760d37c6251b684&units=metric`;
     try {
         const res = await fetch(url);
         const data = await res.json();
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
-        wind.textContent = `Wind speed: ${Math.floor(data.wind.speed)} m/s`;
-        humidity.textContent = `Humidity: ${Math.floor(data.main.humidity)}%`;
+        wind.textContent = (settings.options.language === 'en' ? 'Wind speed:' : 'Швидкість вітру:') + ` ${Math.floor(data.wind.speed)} m/s`;
+        humidity.textContent =(settings.options.language === 'en' ?'Humidity:':'Вологість') +` ${Math.floor(data.main.humidity)}%`;
         weatherDescription.textContent = data.weather[0].description;
     } catch (error) {
         console.error(error);
-        alert("Wrong city's name! Try agan.");
+       alert( settings.options.language === 'en' ?"Wrong city's name! Try agan.":"Неправильна назва міста! Спробуйте ще раз.");
     }
 }
 
