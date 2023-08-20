@@ -5,7 +5,7 @@ let settings = {
         weather: 'true',
         quote: 'true',
         player: 'true',
-        language: 'uk',
+        language: 'en',
         background: 'github',
         todo: 'true',
     },
@@ -13,6 +13,7 @@ let settings = {
 };
 
 const greeting = document.querySelector('.greeting');
+
 /*1. Times and calendar */
 const time = document.querySelector('.time');
 const dateCalendar = document.querySelector('.date');
@@ -222,7 +223,7 @@ function playAudio() {
 }
 
 function toggleSound() {
-    switchSound.classList.toggle('off');
+    switchSound.classList.toggle('off-sound');
 }
 
 function pauseAudio() {
