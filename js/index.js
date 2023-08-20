@@ -5,13 +5,13 @@ let settings = {
         weather: 'true',
         quote: 'true',
         player: 'true',
-        language: 'en',
+        language: 'uk',
         background: 'github',
         todo: 'true',
     },
     tag: '',
 };
-
+const greeting = document.querySelector('.greeting');
 /*1. Times and calendar */
 const time = document.querySelector('.time');
 const dateCalendar = document.querySelector('.date');
@@ -22,7 +22,7 @@ function showTime() {
     const date = new Date();
     time.textContent = date.toLocaleTimeString();
     showDate();
-    showGreeting();
+    getTimeOfDay();
     setTimeout(showTime, 1000);
 }
 
@@ -49,23 +49,27 @@ function getDate(lang) {
 }
 
 /*2. Greeting */
-
-function showGreeting() {
-    const greeting = document.querySelector('.greeting');
-    greeting.textContent =  settings.options.language === 'en'
-        ? `Good ${getTimeOfDay(`morning`, `afternoon`, `evening`, `night`)}`
-        : getTimeOfDay(`Доброго ранку`, `Доброго дня`, `Доброго вечора`, `Доброї ночі`);
-}
-
-function getTimeOfDay(morning, afternoon, evening, night) {
-    const hours = date.getHours();
-    if (hours >= 6 && hours < 12) return morning;
-    if (hours >= 12 && hours < 18) return afternoon;
-    if (hours >= 18 && hours < 24) return evening;
-    if (hours < 6 && hours >= 0) return night;
-}
-
 const name = document.querySelector('.name');
+
+function showGreeting(enDay, ukDay) {
+    greeting.textContent =  settings.options.language === 'en'? `Good ${enDay}`: ukDay;
+}
+
+function getTimeOfDay() {
+    const hours = date.getHours();
+    if (hours >= 6 && hours < 12) {
+    showGreeting('morning','Доброго ранку')
+    return 'morning'}
+    if (hours >= 12 && hours < 18) {
+    showGreeting('afternoon','Доброго дня');
+    return 'afternoon'}
+    if (hours >= 18 && hours < 24) {
+      showGreeting('evening','Доброго вечора');
+      return 'evening'}
+    if (hours < 6 && hours >= 0) {
+        showGreeting('night','Доброї ночі');
+        return 'night'}
+}
 
 function setLocalStorage() {
     localStorage.setItem('name', name.value);
@@ -91,7 +95,7 @@ function getRandomNum() {
 let randomNum = getRandomNum();
 
 function setBackground() {
-    const timeOfDay = getTimeOfDay(morning, afternoon, evening, night);
+    const timeOfDay = getTimeOfDay();
     const bgNum = String(randomNum).padStart(2, '0');
     const img = new Image();
     const path = `https://raw.githubusercontent.com/yana-dyachok/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
