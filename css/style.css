@@ -287,11 +287,52 @@ body {
     color: #ffffff;
     opacity: 0.6;
 }
+
+/* footer--------------------------------------------------------------------------------------------------------------------------------------------- */
+/*quote block---------------------------------------------------------------------------------------------------------------------------------------   */
+.quote-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    min-height: 160px;
+    padding: 0px 20px 40px;
+}
+
+.change-quote {
+    margin-bottom: 30px;
+    background-image: url('../assets/player-logo/reload.svg');
+}
+
+.quote {
+    min-height: 32px;
+}
+
+.author {
+    min-height: 20px;
+}
+
+/* applications--------------------------------------------------------------------------------------------------------------------------------------- */
+.applications {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 /* settings------------------------------------------------------------------------------------------------------------------------------------------- */
+.settings-icon {
+  width: 40px;
+  height: 40px;
+  background: url("../assets/logo/gtkabout.png") center/cover;
+}
+
 .settings-block {
     width: 300px;
     height: 400px;
     padding: 30px;
+    /* visibility: hidden; */
+    display: none;
     border-radius: 10px;
     background-color: rgba(15, 153, 198, 0.6);
 }
@@ -334,31 +375,7 @@ body {
     left: 20px;
 }
 
-/* footer--------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.quote-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    height: 30vh;
-    min-height: 160px;
-    padding: 0px 20px 40px;
-}
-
-.change-quote {
-    margin-bottom: 30px;
-    background-image: url('../assets/player-logo/reload.svg');
-}
-
-.quote {
-    min-height: 32px;
-}
-
-.author {
-    min-height: 20px;
-}
 
 .list-footer {
     display: flex;
