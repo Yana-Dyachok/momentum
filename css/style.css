@@ -287,6 +287,42 @@ align-items: center;
     color: #ffffff;
     opacity: 0.6;
 }
+/* settings------------------------------------------------------------------------------------------------------------------------------------------- */
+.settings-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle-block {
+  width: 20px;
+  height: 4px;
+  display: block;
+  position: relative;
+  border-radius:10px;
+  background-color: rgb(23, 5, 82);
+    }
+
+.indicator {
+    width: 10px;
+    height: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius:10px;
+    background: linear-gradient(to bottom, rgb(7, 1, 27), rgb(42, 5, 166));
+    cursor: pointer;
+}
+
+  .indicator.active {
+        left: 20px;
+        background: linear-gradient(
+            to bottom,
+            rgb(226, 242, 102),
+            rgb(218, 240, 56)
+        );
+  }
+
+/* footer--------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .quote-block {
     display: flex;
