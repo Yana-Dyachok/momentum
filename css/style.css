@@ -141,8 +141,8 @@ body {
 }
 
 .sound-adjustment {
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .switch-sound {
@@ -160,10 +160,10 @@ align-items: center;
 }
 
 .progress-sound {
-  width: 145px;
-  height: 10px;
-  background-color: #ffffff;
-  border-radius: 20px;
+    width: 145px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 20px;
 }
 
 .weather {
@@ -289,26 +289,26 @@ align-items: center;
 }
 /* settings------------------------------------------------------------------------------------------------------------------------------------------- */
 .settings-block {
-  width: 300px;
-  height: 400px;
-  padding: 30px;
-  border-radius: 10px;
-  background-color: rgba(15, 153, 198, 0.6);
+    width: 300px;
+    height: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(15, 153, 198, 0.6);
 }
 .settings-items {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 25px;
 }
 
 .toggle-block {
-  width: 40px;
-  height: 18px;
-  display: block;
-  position: relative;
-  border-radius:10px;
-  background-color: rgb(217, 213, 231);
-    }
+    width: 40px;
+    height: 18px;
+    display: block;
+    position: relative;
+    border-radius: 10px;
+    background-color: #d9d5e7;
+}
 
 .indicator {
     width: 18px;
@@ -316,14 +316,15 @@ align-items: center;
     position: absolute;
     top: 0;
     left: 1px;
-    border-radius:10px;
-    background: linear-gradient(to bottom, #0b4661,  #00ffff);
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #0b4661, #00ffff);
+    transition: 0.3s ease-out;
     cursor: pointer;
 }
 
-  .indicator.active {
-        left: 19px;
-  }
+.indicator.active {
+    left: 20px;
+}
 
 /* footer--------------------------------------------------------------------------------------------------------------------------------------------- */
 
