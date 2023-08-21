@@ -391,7 +391,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 100px;
+    padding-left: 20px;
 }
 
 .footer-item {  
@@ -401,14 +401,15 @@ body {
 }
 
 .footer-link {
-    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #76f8f8);
-    cursor: pointer;
     padding:0 40px;
+    transition: box-shadow 0.7s ease-out 0s;
 }
 
+.settings-icon:hover,
+.todo-icon:hover,
 .footer-link:hover {
-    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #eff1f3);
-    transition: box-shadow 0.7s ease-out 0s;
+    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #76f8f8);
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
