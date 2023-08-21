@@ -358,4 +358,11 @@ play.addEventListener('click', pauseAudio);
 playNext.addEventListener('click', getplayNext);
 
 import playList from './playlist.js';
-//console.log(playList);
+
+// settings------------------------------------------------------------
+const settingBlock=document.querySelector('.settings');
+function openSettings() {
+
+}
+
+settingBlock.addEventListener('click', openSettings)
