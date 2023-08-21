@@ -202,81 +202,160 @@ getQuotes();
 changeQuote.addEventListener('click', getQuotes);
 
 /*6. Audio player */
+// const playPrev = document.querySelector('.play-prev');
+// const play = document.querySelector('.play');
+// const playNext = document.querySelector('.play-next');
+// const audio = document.querySelector('audio');
+// const switchSound = document.querySelector('.switch-sound');
+// let isPlay = false;
+// let playNum = 0;
+
+// function playAudio() {
+//     if (isPlay) {
+//         isPlay = true;
+//         audio.play();
+//         play.classList.add('pause');
+//     } else {
+//         isPlay = false;
+//         audio.pause();
+//         play.classList.remove('pause');
+//     }
+// }
+
+// function toggleSound() {
+//     switchSound.classList.toggle('off-sound');
+// }
+
+// function pauseAudio() {
+//     if (isPlay) {
+//         isPlay = false;
+//         audio.pause();
+//     } else {
+//         isPlay = true;
+//         audio.play();
+//     }
+// }
+
+// function toggleBtn() {
+//     play.classList.toggle('pause');
+// }
+
+// function getplayNext() {
+//     if (playNum < playList.length - 1) playNum++;
+//     else {
+//         playNum = 0;
+//     }
+//     const currentItem = document.querySelectorAll('.play-item')[playNum];
+//     const prevItem =
+//         document.querySelectorAll('.play-item')[
+//             playNum === 0 ? playList.length - 1 : playNum - 1
+//         ];
+//     currentItem.classList.add('item-active');
+//     prevItem.classList.remove('item-active');
+//     audio.src = playList[playNum].src;
+//     playAudio();
+// }
+
+// function getplayPrev() {
+//     if (playNum > 0) playNum--;
+//     else {
+//         playNum = playList.length - 1;
+//     }
+//     const currentItem = document.querySelectorAll('.play-item')[playNum];
+//     const nextItem =
+//         document.querySelectorAll('.play-item')[
+//             (playNum + 1) % playList.length
+//         ];
+//     currentItem.classList.add('item-active');
+//     nextItem.classList.remove('item-active');
+//     audio.src = playList[playNum].src;
+//     playAudio();
+// }
+
+// play.addEventListener('click', toggleBtn);
+// playPrev.addEventListener('click', getplayPrev);
+// play.addEventListener('click', pauseAudio);
+// playNext.addEventListener('click', getplayNext);
+// switchSound.addEventListener('click', toggleSound);
+
 const playPrev = document.querySelector('.play-prev');
 const play = document.querySelector('.play');
 const playNext = document.querySelector('.play-next');
 const audio = document.querySelector('audio');
-const switchSound = document.querySelector('.switch-sound');
+const nameSong=document.querySelector('.name-song')
+const playItem = document.querySelector('.play-item');
+const progressed = document.querySelector('.progressed');
 let isPlay = false;
 let playNum = 0;
-
+nameSong.textContent=playItem.textContent
 function playAudio() {
-    if (isPlay) {
-        isPlay = true;
-        audio.play();
-        play.classList.add('pause');
-    } else {
-        isPlay = false;
-        audio.pause();
-        play.classList.remove('pause');
-    }
-}
-
-function toggleSound() {
-    switchSound.classList.toggle('off-sound');
+  if (isPlay) {
+    isPlay = true;
+    audio.play();
+    play.classList.add('pause');
+  }
+  else {
+    isPlay = false;
+    audio.pause();
+    play.classList.remove('pause');
+  }
 }
 
 function pauseAudio() {
-    if (isPlay) {
-        isPlay = false;
-        audio.pause();
-    } else {
-        isPlay = true;
-        audio.play();
-    }
+  if (isPlay) {
+    isPlay = false;
+    audio.pause();
+  }
+  else {
+    isPlay = true;
+    audio.play();
+  }
 }
 
 function toggleBtn() {
-    play.classList.toggle('pause');
+  play.classList.toggle('pause');
 }
 
 function getplayNext() {
-    if (playNum < playList.length - 1) playNum++;
-    else {
-        playNum = 0;
-    }
-    const currentItem = document.querySelectorAll('.play-item')[playNum];
-    const prevItem =
-        document.querySelectorAll('.play-item')[
-            playNum === 0 ? playList.length - 1 : playNum - 1
-        ];
-    currentItem.classList.add('item-active');
-    prevItem.classList.remove('item-active');
-    audio.src = playList[playNum].src;
-    playAudio();
+  if (playNum < playList.length - 1) playNum++;
+  else {
+    playNum = 0;
+  }
+  const currentAudio = document.querySelectorAll('.play-audio')[playNum];
+  const currentItem = document.querySelectorAll('.play-item')[playNum];
+  const prevItem = document.querySelectorAll('.play-item')[playNum === 0 ? playList.length - 1 : playNum - 1];
+  currentItem.classList.add('item-active');
+  prevItem.classList.remove('item-active');
+  nameSong.textContent=currentItem.textContent
+  currentAudio.ntimeupdate=progressBar(currentAudio)
+  audio.src = playList[playNum].src;
+  playAudio();
 }
 
 function getplayPrev() {
-    if (playNum > 0) playNum--;
-    else {
-        playNum = playList.length - 1;
-    }
-    const currentItem = document.querySelectorAll('.play-item')[playNum];
-    const nextItem =
-        document.querySelectorAll('.play-item')[
-            (playNum + 1) % playList.length
-        ];
-    currentItem.classList.add('item-active');
-    nextItem.classList.remove('item-active');
-    audio.src = playList[playNum].src;
-    playAudio();
+  if (playNum > 0) playNum--;
+  else {
+    playNum = playList.length - 1;
+  }
+  const currentAudio = document.querySelectorAll('.play-audio')[playNum];
+  const currentItem = document.querySelectorAll('.play-item')[playNum];
+  const nextItem = document.querySelectorAll('.play-item')[(playNum + 1) % playList.length];
+  currentItem.classList.add('item-active');
+  nextItem.classList.remove('item-active');
+  nameSong.textContent=currentItem.textContent
+  currentAudio.ntimeupdate=progressBar(currentAudio)
+  audio.src = playList[playNum].src;
+  playAudio();
+}
+
+function progressBar(elem) {
+progressed.style.width=~~(80)+'%';
 }
 
 play.addEventListener('click', toggleBtn);
 playPrev.addEventListener('click', getplayPrev);
 play.addEventListener('click', pauseAudio);
 playNext.addEventListener('click', getplayNext);
-switchSound.addEventListener('click', toggleSound);
 
 import playList from './playlist.js';
 //console.log(playList);
