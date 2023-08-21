@@ -366,3 +366,10 @@ function openSettings() {
 }
 
 settingBlock.addEventListener('click', openSettings)
+
+const indicator=document.querySelectorAll('.indicator');
+indicator.forEach(btn=> {
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+    });
+});
