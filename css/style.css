@@ -301,6 +301,14 @@ body {
     padding-bottom: 25px;
 }
 
+.swich-block {
+  display: flex;
+}
+
+.swich-block > *:not(:last-child) {
+  margin-right: 5px;
+}
+
 .toggle-block {
     width: 40px;
     height: 18px;
