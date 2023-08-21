@@ -31,7 +31,7 @@ function showTime() {
 showTime();
 
 function showDate() {
-    settings.options.language === 'en'? getDate('en-Us') : getDate('uk-UA');
+    settings.options.language === 'en' ? getDate('en-Us') : getDate('uk-UA');
 }
 
 function capitalizeFirstLetter(string) {
@@ -52,26 +52,32 @@ function getDate(lang) {
 
 /*2. Greeting */
 const name = document.querySelector('.name');
-name.placeholder =settings.options.language === 'en'?"[Enter name]" :'[Введіть ім\'я]';
+name.placeholder =
+    settings.options.language === 'en' ? '[Enter name]' : "[Введіть ім'я]";
 
 function showGreeting(enDay, ukDay) {
-    greeting.textContent =settings.options.language === 'en'? `Good ${enDay}`: ukDay;
+    greeting.textContent =
+        settings.options.language === 'en' ? `Good ${enDay}` : ukDay;
 }
 
 function getTimeOfDay() {
     const hours = date.getHours();
     if (hours >= 6 && hours < 12) {
-    showGreeting('morning','Доброго ранку')
-    return 'morning'}
+        showGreeting('morning', 'Доброго ранку');
+        return 'morning';
+    }
     if (hours >= 12 && hours < 18) {
-    showGreeting('afternoon','Доброго дня');
-    return 'afternoon'}
+        showGreeting('afternoon', 'Доброго дня');
+        return 'afternoon';
+    }
     if (hours >= 18 && hours < 24) {
-      showGreeting('evening','Доброго вечора');
-      return 'evening'}
+        showGreeting('evening', 'Доброго вечора');
+        return 'evening';
+    }
     if (hours < 6 && hours >= 0) {
-        showGreeting('night','Доброї ночі');
-        return 'night'}
+        showGreeting('night', 'Доброї ночі');
+        return 'night';
+    }
 }
 
 function setLocalStorage() {
@@ -149,26 +155,38 @@ if (savedCity) {
     city.value = capitalizeFirstLetter(savedCity);
     getWeather(savedCity);
 } else {
-    city.value =settings.options.language === 'en' ?'Minsk':'Минск'
+    city.value = settings.options.language === 'en' ? 'Minsk' : 'Минск';
     getWeather(city.value);
 }
 
 async function getWeather(cityName) {
-    let url =settings.options.language === 'en' 
-    ?`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=en&appid=e15cc81ed311b5889760d37c6251b684&units=metric`
-    :`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=uk&appid=e15cc81ed311b5889760d37c6251b684&units=metric`;
+    let url =
+        settings.options.language === 'en'
+            ? `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=en&appid=e15cc81ed311b5889760d37c6251b684&units=metric`
+            : `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=uk&appid=e15cc81ed311b5889760d37c6251b684&units=metric`;
     try {
         const res = await fetch(url);
         const data = await res.json();
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
-        wind.textContent = (settings.options.language === 'en' ? 'Wind speed:' : 'Швидкість вітру:') + ` ${Math.floor(data.wind.speed)}`+(settings.options.language === 'en' ? 'm/s' : 'м/с');
-        humidity.textContent =(settings.options.language === 'en' ?'Humidity:':'Вологість') +` ${Math.floor(data.main.humidity)}%`;
+        wind.textContent =
+            (settings.options.language === 'en'
+                ? 'Wind speed:'
+                : 'Швидкість вітру:') +
+            ` ${Math.floor(data.wind.speed)}` +
+            (settings.options.language === 'en' ? 'm/s' : 'м/с');
+        humidity.textContent =
+            (settings.options.language === 'en' ? 'Humidity:' : 'Вологість') +
+            ` ${Math.floor(data.main.humidity)}%`;
         weatherDescription.textContent = data.weather[0].description;
     } catch (error) {
         console.error(error);
-       alert( settings.options.language === 'en' ?"Wrong city's name! Try agan.":"Неправильна назва міста! Спробуйте ще раз.");
+        alert(
+            settings.options.language === 'en'
+                ? "Wrong city's name! Try agan."
+                : 'Неправильна назва міста! Спробуйте ще раз.'
+        );
     }
 }
 
@@ -190,7 +208,10 @@ function getQuoteIndex() {
 }
 
 async function getQuotes() {
-    let res =settings.options.language === 'en'? await fetch('./js/data.json'):await fetch('./js/datauk.json');
+    let res =
+        settings.options.language === 'en'
+            ? await fetch('./js/data.json')
+            : await fetch('./js/datauk.json');
     const data = await res.json();
     const randomQuote = getQuoteIndex();
     const { quote: text, author: authorName } = data[randomQuote];
@@ -282,74 +303,78 @@ const playPrev = document.querySelector('.play-prev');
 const play = document.querySelector('.play');
 const playNext = document.querySelector('.play-next');
 const audio = document.querySelector('audio');
-const nameSong=document.querySelector('.name-song')
+const nameSong = document.querySelector('.name-song');
 const playItem = document.querySelector('.play-item');
 const progressed = document.querySelector('.progressed');
 let isPlay = false;
 let playNum = 0;
-nameSong.textContent=playItem.textContent
+nameSong.textContent = playItem.textContent;
 function playAudio() {
-  if (isPlay) {
-    isPlay = true;
-    audio.play();
-    play.classList.add('pause');
-  }
-  else {
-    isPlay = false;
-    audio.pause();
-    play.classList.remove('pause');
-  }
+    if (isPlay) {
+        isPlay = true;
+        audio.play();
+        play.classList.add('pause');
+    } else {
+        isPlay = false;
+        audio.pause();
+        play.classList.remove('pause');
+    }
 }
 
 function pauseAudio() {
-  if (isPlay) {
-    isPlay = false;
-    audio.pause();
-  }
-  else {
-    isPlay = true;
-    audio.play();
-  }
+    if (isPlay) {
+        isPlay = false;
+        audio.pause();
+    } else {
+        isPlay = true;
+        audio.play();
+    }
 }
 
 function toggleBtn() {
-  play.classList.toggle('pause');
+    play.classList.toggle('pause');
 }
 
 function getplayNext() {
-  if (playNum < playList.length - 1) playNum++;
-  else {
-    playNum = 0;
-  }
-  const currentAudio = document.querySelectorAll('.play-audio')[playNum];
-  const currentItem = document.querySelectorAll('.play-item')[playNum];
-  const prevItem = document.querySelectorAll('.play-item')[playNum === 0 ? playList.length - 1 : playNum - 1];
-  currentItem.classList.add('item-active');
-  prevItem.classList.remove('item-active');
-  nameSong.textContent=currentItem.textContent
-  currentAudio.ntimeupdate=progressBar(currentAudio)
-  audio.src = playList[playNum].src;
-  playAudio();
+    if (playNum < playList.length - 1) playNum++;
+    else {
+        playNum = 0;
+    }
+    const currentAudio = document.querySelectorAll('.play-audio')[playNum];
+    const currentItem = document.querySelectorAll('.play-item')[playNum];
+    const prevItem =
+        document.querySelectorAll('.play-item')[
+            playNum === 0 ? playList.length - 1 : playNum - 1
+        ];
+    currentItem.classList.add('item-active');
+    prevItem.classList.remove('item-active');
+    nameSong.textContent = currentItem.textContent;
+    currentAudio.ntimeupdate = progressBar(currentAudio);
+    audio.src = playList[playNum].src;
+    playAudio();
 }
 
 function getplayPrev() {
-  if (playNum > 0) playNum--;
-  else {
-    playNum = playList.length - 1;
-  }
-  const currentAudio = document.querySelectorAll('.play-audio')[playNum];
-  const currentItem = document.querySelectorAll('.play-item')[playNum];
-  const nextItem = document.querySelectorAll('.play-item')[(playNum + 1) % playList.length];
-  currentItem.classList.add('item-active');
-  nextItem.classList.remove('item-active');
-  nameSong.textContent=currentItem.textContent
-  currentAudio.ntimeupdate=progressBar(currentAudio)
-  audio.src = playList[playNum].src;
-  playAudio();
+    if (playNum > 0) playNum--;
+    else {
+        playNum = playList.length - 1;
+    }
+    const currentAudio = document.querySelectorAll('.play-audio')[playNum];
+    const currentItem = document.querySelectorAll('.play-item')[playNum];
+    const nextItem =
+        document.querySelectorAll('.play-item')[
+            (playNum + 1) % playList.length
+        ];
+    currentItem.classList.add('item-active');
+    nextItem.classList.remove('item-active');
+    nameSong.textContent = currentItem.textContent;
+    currentAudio.ntimeupdate = progressBar(currentAudio);
+    audio.src = playList[playNum].src;
+    playAudio();
 }
 
 function progressBar(elem) {
-progressed.style.width=~~(80)+'%';
+    progressed.style.width = ~~80 + '%';
 }
 
 play.addEventListener('click', toggleBtn);
@@ -360,16 +385,90 @@ playNext.addEventListener('click', getplayNext);
 import playList from './playlist.js';
 
 // settings------------------------------------------------------------
-const settingBlock=document.querySelector('.settings');
-function openSettings() {
+const settingBtn = document.querySelector('.settings-icon');
+const settingsBlock = document.querySelector('.settings');
+let optionsName = document.querySelectorAll('.options-name');
+const swichBlocks = document.querySelectorAll('.swich-block');
+let onToggle = [];
+let offToggle = [];
 
+swichBlocks.forEach((swichBlock) => {
+    //const children = swichBlock.children;
+    onToggle.push(swichBlock.children[0]);
+    offToggle.push(swichBlock.children[swichBlock.children.length - 1]);
+});
+
+function openSettings() {
+    settingsBlock.classList.toggle('target');
 }
 
-settingBlock.addEventListener('click', openSettings)
+settingBtn.addEventListener('click', openSettings);
 
-const indicator=document.querySelectorAll('.indicator');
-indicator.forEach(btn=> {
+const indicator = document.querySelectorAll('.indicator');
+
+function changeSettingsLanguage() {
+    const ukSettings = [
+        'Мова',
+        'Плеєр',
+        'Погода',
+        'Час',
+        'Привітання',
+        'Цитата дня',
+        'Список справ',
+        'Фонове зображення',
+    ];
+    const enSettings = [
+        'Language',
+        'Player',
+        'Weather',
+        'Time',
+        'Greeting',
+        'Quote',
+        'ToDo',
+        'Background Image',
+    ];
+
+    if (settings.options.language === 'en') {
+        optionsName.forEach((el, i) => {
+            optionsName[i].textContent = enSettings[i];
+        });
+
+        onToggle.forEach((el, i) => {
+            onToggle[0].textContent = 'En';
+            onToggle[i].textContent = 'On';
+        });
+
+        offToggle.forEach((el, i) => {
+            offToggle[0].textContent = 'Uk';
+            offToggle[i].textContent = 'Off';
+        });
+    } else {
+        optionsName.forEach((el, i) => {
+            optionsName[i].textContent = ukSettings[i];
+        });
+
+        onToggle.forEach((el, i) => {
+            onToggle[0].textContent = 'Анг';
+            onToggle[i].textContent = 'Вкл';
+        });
+
+        offToggle.forEach((el, i) => {
+            offToggle[0].textContent = 'Укр';
+            offToggle[i].textContent = 'Викл';
+        });
+    }
+
+    getQuotes();
+    showTheWeather();
+    showTime();
+}
+
+indicator.forEach((btn, i) => {
     btn.addEventListener('click', () => {
         btn.classList.toggle('active');
+        if (i === 0) {
+            settings.options.language = indicator[0].classList.contains('active')? 'uk':'en';
+            changeSettingsLanguage();
+        }
     });
 });
