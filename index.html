@@ -1,186 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="assets/logo/favicon.ico" rel="shortcut icon" />
+        <link rel="stylesheet" href="./css/owfont-regular.css" />
+        <link rel="stylesheet" href="./css/style.css" />
+        <title>momentum</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="assets/logo/favicon.ico" rel="shortcut icon" />
-  <link rel="stylesheet" href="./css/owfont-regular.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <title>momentum</title>
-</head>
-
-<body>
-  <header class="header">
-    <div class="player">
-      <div class="player-controls">
-        <button class="play-prev player-icon"></button>
-        <button class="play player-icon"></button>
-        <button class="play-next player-icon"></button>
-      </div>
-      <figure>
-        <figcaption class="name-song"></figcaption>
-        <div class="progress-bar-audio">
-        <div class="progressed"></div>
-        </div>
-      </figure>
-      <div class="sound-adjustment">
-        <button class="switch-sound"></button>
-        <div class="progress-sound"></div>
-        <div class="progressed-sound"></div>
-      </div>
-      <ul class="play-list">
-        <li class="play-item"><audio class="play-audio" src="./assets/sounds/Aqua Caelestis.mp3"></audio>Aqua Caelestis</li>
-        <li class="play-item"><audio class="play-audio" src="./assets/sounds/River Flows In You.mp3"></audio>River Flows In You</li>
-        <li class="play-item"><audio class="play-audio" src="./assets/sounds/Summer Wind.mp3"></audio>Summer Wind</li>
-        <li class="play-item"><audio class="play-audio" src="./assets/sounds/Ennio Morricone.mp3"></audio>Ennio Morricone</li>
-      </ul>
-    </div>
-    <div class="weather">
-      <input type="text" class="city" />
-      <i class="weather-icon owf"></i>
-      <div class="weather-error"></div>
-      <div class="description-container">
-        <span class="temperature"></span>
-        <span class="weather-description"></span>
-      </div>
-      <div class="wind"></div>
-      <div class="humidity"></div>
-    </div>
-  </header>
-  <main class="main">
-    <div class="slider-icons">
-      <button class="slide-prev slider-icon"></button>
-      <button class="slide-next slider-icon"></button>
-    </div>
-    <time class="time"></time>
-    <date class="date"></date>
-    <div class="greeting-container">
-      <span class="greeting"></span>
-      <input class="name" type="text" placeholder="[Enter name]" />
-    </div>
-  </main>
-  <footer class="footer">
-    <div class="quote-block">
-    <button class="change-quote"></button>
-    <div>
-      <div class="quote"></div>
-      <div class="author"></div>
-    </div>
-  </div>
-  <div class="aplications-block">
-    <div class="todo-list"></div>
-      <ul class="list-footer">
-        <li class="item-footer">
-          <a
-            class="link-footer"
-            href="https://github.com/Yana-Dyachok">
-            <img
-            class="icone-footer"
-            src="./assets/logo/github.svg"
-            alt="github-icone"
-            width="30"
-            height="30">
-          </a>
-        </li>
-        <li class="item-footer">© 2023</li>
-        <li class="item-footer ">
-          <a class="link-footer" href="https://rs.school/js/">
-            <img
-             class="icone-footer"
-              src="./assets/logo/rs_school_js.svg"
-              alt="rs-school"
-              width="100"
-              height="50">
-          </a>
-        </li>
-      </ul>
-      <div class="settings">
-        <div class="settings-icon"></div>
-        <div class="settings-block">
-
-          <div class="settings-items">
-            <h4 class="options">Language</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">En</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Uk</p>
+    <body>
+        <header class="header">
+            <div class="player">
+                <div class="player-controls">
+                    <button class="play-prev player-icon"></button>
+                    <button class="play player-icon"></button>
+                    <button class="play-next player-icon"></button>
+                </div>
+                <figure>
+                    <figcaption class="name-song"></figcaption>
+                    <div class="progress-bar-audio">
+                        <div class="progressed"></div>
+                    </div>
+                </figure>
+                <div class="sound-adjustment">
+                    <button class="switch-sound"></button>
+                    <div class="progress-sound"></div>
+                    <div class="progressed-sound"></div>
+                </div>
+                <ul class="play-list">
+                    <li class="play-item">
+                        <audio
+                            class="play-audio"
+                            src="./assets/sounds/Aqua Caelestis.mp3"
+                        ></audio
+                        >Aqua Caelestis
+                    </li>
+                    <li class="play-item">
+                        <audio
+                            class="play-audio"
+                            src="./assets/sounds/River Flows In You.mp3"
+                        ></audio
+                        >River Flows In You
+                    </li>
+                    <li class="play-item">
+                        <audio
+                            class="play-audio"
+                            src="./assets/sounds/Summer Wind.mp3"
+                        ></audio
+                        >Summer Wind
+                    </li>
+                    <li class="play-item">
+                        <audio
+                            class="play-audio"
+                            src="./assets/sounds/Ennio Morricone.mp3"
+                        ></audio
+                        >Ennio Morricone
+                    </li>
+                </ul>
             </div>
-          </div>
-
-          <div class="settings-items">
-            <h4 class="options">Player</h4>
-            <div class="swich-block">
-            <p  class="toggle-items">On</p>
-            <div class="toggle-block">
-              <i class="indicator"></i>
+            <div class="weather">
+                <input type="text" class="city" />
+                <i class="weather-icon owf"></i>
+                <div class="weather-error"></div>
+                <div class="description-container">
+                    <span class="temperature"></span>
+                    <span class="weather-description"></span>
+                </div>
+                <div class="wind"></div>
+                <div class="humidity"></div>
             </div>
-            <p class="toggle-items">Off</p>
+        </header>
+        <main class="main">
+            <div class="slider-icons">
+                <button class="slide-prev slider-icon"></button>
+                <button class="slide-next slider-icon"></button>
             </div>
-          </div>
-  
-          <div class="settings-items">
-            <h4 class="options">Weather</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">On</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Off</p>
-              </div>
-          </div>
-  
-          <div class="settings-items">
-            <h4 class="options">Time</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">On</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Off</p>
-              </div>
-          </div>
-  
-          <div class="settings-items">
-            <h4 class="options">Greeting</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">On</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Off</p>
-              </div>
-          </div>
-  
-          <div class="settings-items">
-            <h4 class="options">Quote</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">On</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Off</p>
-              </div>
-          </div>
-  
-          <div class="settings-items">
-            <h4 class="options">Todo</h4>
-            <div class="swich-block">
-              <p  class="toggle-items">On</p>
-              <div class="toggle-block">
-                <i class="indicator"></i>
-              </div>
-              <p class="toggle-items">Off</p>
-              </div>
-          </div>
-        </div>
-     </div>
-       
-    </div>
-  </footer>
-  <script type="module" src="./js/index.js"></script>
-</body>
+            <time class="time"></time>
+            <date class="date"></date>
+            <div class="greeting-container">
+                <span class="greeting"></span>
+                <input class="name" type="text" placeholder="[Enter name]" />
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="quote-block">
+                <button class="change-quote"></button>
+                <div>
+                    <div class="quote"></div>
+                    <div class="author"></div>
+                </div>
+            </div>
+            <div class="aplications-block">
+                <div class="todo-list"></div>
+                <ul class="footer-list">
+                    <li class="footer-item">
+                        <a
+                            class="footer-link"
+                            href="https://github.com/Yana-Dyachok"
+                        >
+                            <img
+                                class="icone-footer"
+                                src="./assets/logo/github.svg"
+                                alt="github-icone"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                    </li>
+                    <li class="footer-item">© 2023</li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="https://rs.school/js/">
+                            <img
+                                class="icone-footer"
+                                src="./assets/logo/rs_school_js.svg"
+                                alt="rs-school"
+                                width="100"
+                                height="50"
+                            >
+                        </a>
+                    </li>
+                </ul>
+                <div class="settings">
+                    <div class="settings-icon"></div>
+                    <div class="settings-block">
+                        <div class="settings-items">
+                            <h4 class="options">Language</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">En</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Uk</p>
+                            </div>
+                        </div>
 
+                        <div class="settings-items">
+                            <h4 class="options">Player</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-items">
+                            <h4 class="options">Weather</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-items">
+                            <h4 class="options">Time</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-items">
+                            <h4 class="options">Greeting</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-items">
+                            <h4 class="options">Quote</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-items">
+                            <h4 class="options">Todo</h4>
+                            <div class="swich-block">
+                                <p class="toggle-items">On</p>
+                                <div class="toggle-block">
+                                    <i class="indicator"></i>
+                                </div>
+                                <p class="toggle-items">Off</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script type="module" src="./js/index.js"></script>
+    </body>
 </html>

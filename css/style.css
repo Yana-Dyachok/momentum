@@ -315,10 +315,12 @@ body {
 }
 
 /* applications--------------------------------------------------------------------------------------------------------------------------------------- */
-.applications {
+.aplications-block {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  padding: 0px 50px;
 }
 /* settings------------------------------------------------------------------------------------------------------------------------------------------- */
 .settings-icon {
@@ -377,26 +379,26 @@ body {
 
 
 
-.list-footer {
+.footer-list {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 100px;
 }
 
-.item-footer {
-    width: 50px;
-    height: 50px;
+.footer-item {  
     list-style: none;
     text-decoration: none;
     color: #ffffff;
 }
 
-.link-footer {
+.footer-link {
     filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #76f8f8);
     cursor: pointer;
+    padding:0 40px;
 }
 
-.link-footer:hover {
+.footer-link:hover {
     filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #eff1f3);
     transition: box-shadow 0.7s ease-out 0s;
 }
