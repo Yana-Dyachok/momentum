@@ -1,6 +1,7 @@
 let settings = {
     options: {
         time: 'true',
+        date: 'true',
         greeting: 'true',
         weather: 'true',
         quote: 'true',
@@ -392,10 +393,11 @@ import playList from './playlist.js';
 
 // settings------------------------------------------------------------
 const settingBtn = document.querySelector('.settings-icon');
-const overlay= document.querySelector('.overlay');
+const overlay = document.querySelector('.overlay');
 const settingsBlock = document.querySelector('.settings-block');
-let optionsName = document.querySelectorAll('.options-name');
 const swichBlocks = document.querySelectorAll('.swich-block');
+const indicator = document.querySelectorAll('.indicator');
+let optionsName = document.querySelectorAll('.options-name');
 let onToggle = [];
 let offToggle = [];
 
@@ -412,14 +414,13 @@ function openSettings() {
 settingBtn.addEventListener('click', openSettings);
 overlay.addEventListener('click', openSettings);
 
-const indicator = document.querySelectorAll('.indicator');
-
 function changeSettingsLanguage() {
     const ukSettings = [
         'Мова',
         'Плеєр',
         'Погода',
         'Час',
+        'Дата',
         'Привітання',
         'Цитата дня',
         'Список справ',
@@ -430,6 +431,7 @@ function changeSettingsLanguage() {
         'Player',
         'Weather',
         'Time',
+        'Date',
         'Greeting',
         'Quote',
         'ToDo',
@@ -471,12 +473,48 @@ function changeSettingsLanguage() {
     showTime();
 }
 
+function hideBlock(options, selector) {
+    document.querySelector(selector).style.visibility =
+        options === 'true' ? 'visible' : 'hidden';
+}
+
+const selectors = [
+    '.player',
+    '.weather',
+    '.time',
+    '.date',
+    '.greeting-container',
+    '.quote-block',
+    '.todo-list',
+];
+
 indicator.forEach((btn, i) => {
     btn.addEventListener('click', () => {
         btn.classList.toggle('active');
+
+        const optionProperties = [
+            'player',
+            'weather',
+            'time',
+            'date',
+            'greeting',
+            'quote',
+            'todo',
+        ];
+
         if (i === 0) {
-            settings.options.language = indicator[0].classList.contains('active')? 'uk':'en';
+            settings.options.language = indicator[0].classList.contains(
+                'active'
+            )
+                ? 'uk'
+                : 'en';
             changeSettingsLanguage();
+        } else {
+            const optionKey = optionProperties[i - 1];
+            settings.options[optionKey] = btn.classList.contains('active')
+                ? 'false'
+                : 'true';
+            hideBlock(settings.options[optionKey], selectors[i - 1]);
         }
     });
 });
