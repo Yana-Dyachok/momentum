@@ -306,6 +306,7 @@ const audio = document.querySelector('audio');
 const nameSong = document.querySelector('.name-song');
 const playItem = document.querySelector('.play-item');
 const progressed = document.querySelector('.progressed');
+const switchSound = document.querySelector('.switch-sound');
 let isPlay = false;
 let playNum = 0;
 nameSong.textContent = playItem.textContent;
@@ -377,10 +378,15 @@ function progressBar(elem) {
     progressed.style.width = ~~80 + '%';
 }
 
+function toggleSound() {
+    switchSound.classList.toggle('off-sound');
+}
+
 play.addEventListener('click', toggleBtn);
 playPrev.addEventListener('click', getplayPrev);
 play.addEventListener('click', pauseAudio);
 playNext.addEventListener('click', getplayNext);
+switchSound.addEventListener('click', toggleSound);
 
 import playList from './playlist.js';
 

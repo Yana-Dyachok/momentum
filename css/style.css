@@ -64,8 +64,7 @@ body {
 
 .play-item {
     position: relative;
-    padding: 5px;
-    padding-left: 20px;
+    padding: 5px 5px 5px 30px;
     list-style: none;
     opacity: 0.8;
     cursor: pointer;
@@ -78,15 +77,20 @@ body {
 }
 
 .play-item::before {
-    content: '\2713';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    font-weight: 900;
+  content: "";
+  background: url('../assets/player-logo/play.svg') center/cover no-repeat;
+  background-size: contain; 
+  display: inline-block;
+  width: 20px; 
+  height: 20px; 
+  position: absolute;
+  left: 0;
+  top: 2px;
 }
 
+
 .item-active::before {
-    color: #00ffff;
+  background-image: url('../assets/player-logo/pause.svg');
 }
 
 .player-icon,
@@ -165,7 +169,7 @@ body {
     background-color: #ffffff;
     border-radius: 20px;
 }
-
+ /* weather------------------------------------------------------------------------------------------------------------------------------------------------ */
 .weather {
     display: flex;
     flex-direction: column;
