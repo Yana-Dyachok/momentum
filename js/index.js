@@ -425,6 +425,7 @@ function changeSettingsLanguage() {
         'Цитата дня',
         'Список справ',
         'Фонове зображення',
+        'Тег'
     ];
     const enSettings = [
         'Language',
@@ -436,6 +437,7 @@ function changeSettingsLanguage() {
         'Quote',
         'ToDo',
         'Background Image',
+        'Tag'
     ];
 
     if (settings.options.language === 'en') {
