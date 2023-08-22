@@ -392,23 +392,25 @@ import playList from './playlist.js';
 
 // settings------------------------------------------------------------
 const settingBtn = document.querySelector('.settings-icon');
-const settingsBlock = document.querySelector('.settings');
+const overlay= document.querySelector('.overlay');
+const settingsBlock = document.querySelector('.settings-block');
 let optionsName = document.querySelectorAll('.options-name');
 const swichBlocks = document.querySelectorAll('.swich-block');
 let onToggle = [];
 let offToggle = [];
 
 swichBlocks.forEach((swichBlock) => {
-    //const children = swichBlock.children;
     onToggle.push(swichBlock.children[0]);
     offToggle.push(swichBlock.children[swichBlock.children.length - 1]);
 });
 
 function openSettings() {
-    settingsBlock.classList.toggle('target');
+    overlay.classList.toggle('target');
+    settingsBlock.classList.toggle('active');
 }
 
 settingBtn.addEventListener('click', openSettings);
+overlay.addEventListener('click', openSettings);
 
 const indicator = document.querySelectorAll('.indicator');
 
