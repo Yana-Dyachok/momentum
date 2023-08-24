@@ -406,13 +406,18 @@ swichBlocks.forEach((swichBlock) => {
     offToggle.push(swichBlock.children[swichBlock.children.length - 1]);
 });
 
-function openSettings() {
-    overlay.classList.toggle('target');
-    settingsBlock.classList.toggle('active');
+function openAplications(block) {
+    overlay.classList.add('target');
+    block.classList.add('active');
 }
 
-settingBtn.addEventListener('click', openSettings);
-overlay.addEventListener('click', openSettings);
+function closeAplications(block) {
+    overlay.classList.remove('target');
+    block.classList.remove('active');
+}
+
+settingBtn.addEventListener('click', () => openAplications(settingsBlock));
+overlay.addEventListener('click', () => closeAplications(settingsBlock));
 
 function changeSettingsLanguage() {
     const ukSettings = [
@@ -425,7 +430,7 @@ function changeSettingsLanguage() {
         'Цитата дня',
         'Список справ',
         'Фонове зображення',
-        'Тег'
+        'Тег',
     ];
     const enSettings = [
         'Language',
@@ -437,7 +442,7 @@ function changeSettingsLanguage() {
         'Quote',
         'ToDo',
         'Background Image',
-        'Tag'
+        'Tag',
     ];
 
     if (settings.options.language === 'en') {
