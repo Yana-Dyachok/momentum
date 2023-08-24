@@ -397,7 +397,7 @@ const overlay = document.querySelector('.overlay');
 const settingsBlock = document.querySelector('.settings-block');
 const swichBlocks = document.querySelectorAll('.swich-block');
 const indicator = document.querySelectorAll('.indicator');
-const inputYoDo=document.querySelector('.input-todo')
+const inputToDo=document.querySelector('.input-todo')
 const optionsName = document.querySelectorAll('.options-name');
 const toDoText=document.querySelectorAll('.todo-text')
 let onToggle = [];
@@ -469,7 +469,7 @@ const ukToDo=['Список справ', 'Додати'];
             toDoText[i].textContent = enToDo[i];
         });
 
-        inputYoDo.placeholder ='Add task to be done';
+        inputToDo.placeholder ='Add task to be done';
 
     } else {
         optionsName.forEach((el, i) => {
@@ -489,7 +489,7 @@ const ukToDo=['Список справ', 'Додати'];
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = ukToDo[i];
         });
-        inputYoDo.placeholder ='Додайте завдання, для виконання';
+        inputToDo.placeholder ='Додайте завдання, для виконання';
     }
 
     getQuotes();
@@ -549,7 +549,7 @@ const toDoBlock=document.querySelector('.todo-block');
 const addButton=document.querySelector('.add-todo-btn');
 
 function addTasks() { 
-if(inputYoDo.value==='') {
+if(inputToDo.value==='') {
     alert(
     settings.options.language === 'en'
     ? "You should write something"
@@ -557,7 +557,7 @@ if(inputYoDo.value==='') {
   )}
   else {
     let task=document.createElement('li');
-    task.innerHTML=inputYoDo.value;
+    task.innerHTML=inputToDo.value;
     let span=document.createElement('span');
     span.setAttribute("class", "span-task");
     task.appendChild(span);
@@ -566,7 +566,11 @@ if(inputYoDo.value==='') {
 }
 
 
-addButton.addEventListener('click',  addTasks)
+addButton.addEventListener('click',  addTasks);
+inputToDo.addEventListener('keydown', (event)=> {
+    if (event.key === 'Enter')addTasks();
+});
+
 toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
 overlay.addEventListener('click',()=>closeAplications(toDoBlock));
 
