@@ -397,8 +397,9 @@ const overlay = document.querySelector('.overlay');
 const settingsBlock = document.querySelector('.settings-block');
 const swichBlocks = document.querySelectorAll('.swich-block');
 const indicator = document.querySelectorAll('.indicator');
-let optionsName = document.querySelectorAll('.options-name');
-let toDoText=document.querySelectorAll('.todo-text')
+const inputYoDo=document.querySelector('.input-todo')
+const optionsName = document.querySelectorAll('.options-name');
+const toDoText=document.querySelectorAll('.todo-text')
 let onToggle = [];
 let offToggle = [];
 
@@ -468,7 +469,7 @@ const ukToDo=['Список справ', 'Додати'];
             toDoText[i].textContent = enToDo[i];
         });
 
-        (document.querySelector('.input-todo')).placeholder ='Add task to be done';
+        inputYoDo.placeholder ='Add task to be done';
 
     } else {
         optionsName.forEach((el, i) => {
@@ -488,7 +489,7 @@ const ukToDo=['Список справ', 'Додати'];
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = ukToDo[i];
         });
-        (document.querySelector('.input-todo')).placeholder ='Додайте завдання, для виконання';
+        inputYoDo.placeholder ='Додайте завдання, для виконання';
     }
 
     getQuotes();
@@ -544,7 +545,28 @@ indicator.forEach((btn, i) => {
 
 // todo list----------------------------------------------------------------------------------
 const toDoBtn=document.querySelector('.todo-icon');
-const toDoBlock=document.querySelector('.todo-block')
+const toDoBlock=document.querySelector('.todo-block');
+const addButton=document.querySelector('.add-todo-btn');
 
+function addTasks() { 
+if(inputYoDo.value==='') {
+    alert(
+    settings.options.language === 'en'
+    ? "You should write something"
+    : "Ви повинні щось написати"
+  )}
+  else {
+    let task=document.createElement('li');
+    task.innerHTML=inputYoDo.value;
+    let span=document.createElement('span');
+    span.setAttribute("class", "span-task");
+    task.appendChild(span);
+    document.querySelector('.todo-task-list').appendChild(task)
+  }
+}
+
+
+addButton.addEventListener('click',  addTasks)
 toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
 overlay.addEventListener('click',()=>closeAplications(toDoBlock));
+
