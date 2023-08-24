@@ -390,8 +390,7 @@ body {
     color: #ffffff;
     border: none;
     background-color: #2e90bd;
-    border-radius: 10px;
-    /* border-radius: 0px 10px 10px 0px; */
+    border-radius: 0px 10px 10px 0px;
     cursor: pointer;
 }
 
@@ -458,7 +457,7 @@ body {
 .settings-block {
     position: fixed;
     width: 340px;
-    height: 500px;
+    min-height: 500px;
     bottom: 75px;
     right: 40px;
     padding: 30px;
@@ -486,6 +485,10 @@ body {
 
 .swich-block > *:not(:last-child) {
     margin-right: 10px;
+}
+
+.options-name {
+    text-align: start;
 }
 
 .toggle-block {

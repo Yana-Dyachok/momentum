@@ -398,6 +398,7 @@ const settingsBlock = document.querySelector('.settings-block');
 const swichBlocks = document.querySelectorAll('.swich-block');
 const indicator = document.querySelectorAll('.indicator');
 let optionsName = document.querySelectorAll('.options-name');
+let toDoText=document.querySelectorAll('.todo-text')
 let onToggle = [];
 let offToggle = [];
 
@@ -445,6 +446,9 @@ function changeSettingsLanguage() {
         'Tag',
     ];
 
+const enToDo=['ToDo list', 'Add'];
+const ukToDo=['Список справ', 'Додати'];
+
     if (settings.options.language === 'en') {
         optionsName.forEach((el, i) => {
             optionsName[i].textContent = enSettings[i];
@@ -459,6 +463,13 @@ function changeSettingsLanguage() {
             offToggle[0].textContent = 'Uk';
             offToggle[i].textContent = 'Off';
         });
+        
+        toDoText.forEach((el, i) => {
+            toDoText[i].textContent = enToDo[i];
+        });
+
+        (document.querySelector('.input-todo')).placeholder ='Add task to be done';
+
     } else {
         optionsName.forEach((el, i) => {
             optionsName[i].textContent = ukSettings[i];
@@ -473,6 +484,11 @@ function changeSettingsLanguage() {
             offToggle[0].textContent = 'Укр';
             offToggle[i].textContent = 'Викл';
         });
+
+        toDoText.forEach((el, i) => {
+            toDoText[i].textContent = ukToDo[i];
+        });
+        (document.querySelector('.input-todo')).placeholder ='Додайте завдання, для виконання';
     }
 
     getQuotes();
