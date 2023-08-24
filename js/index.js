@@ -525,3 +525,10 @@ indicator.forEach((btn, i) => {
         }
     });
 });
+
+// todo list----------------------------------------------------------------------------------
+const toDoBtn=document.querySelector('.todo-icon');
+const toDoBlock=document.querySelector('.todo-block')
+
+toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
+overlay.addEventListener('click',()=>closeAplications(toDoBlock));
