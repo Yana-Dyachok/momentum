@@ -342,6 +342,64 @@ body {
   background: url("../assets/logo/document_paperclip_list_paper_icon_219514.svg") center/cover;
 }
 
+.todo-block {
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    bottom: 90px;
+    left: 40px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(15, 153, 198, 0.4);
+    transition: transform 0.5s ease-out, top 0.5s ease-out;
+    transform: translateY(160%);
+    z-index: 99;
+    }
+    
+    .todo-block.active {
+    transform: translateY(0%);
+    transition: transform 0.5s ease-out, bottom 0.5s ease-out;
+    }
+  
+    .input-todo-block {
+      width: 240px;
+      height: 30px;
+      display: flex;
+      border-radius: 10px;
+      background-color: #ffffff;
+    }
+  
+    .input-todo {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      padding-left: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px 0px 0px 10px;
+    }
+  
+    .input-todo::placeholder {
+      color: #312f2f;
+      opacity: 0.6;
+    }
+  
+    .add-todo-btn {
+      width: 70px;
+      height: 30px;
+      color: #ffffff;
+      border: none;
+      background-color: #2e90bd;
+      border-radius: 10px;
+      /* border-radius: 0px 10px 10px 0px; */
+      cursor: pointer;
+    }
+  
+    .add-todo-btn:hover {
+      color: #312f2f;
+      background-color: #00ffff;
+    }
+
 /* settings------------------------------------------------------------------------------------------------------------------------------------------- */
 .settings-icon {
   width: 40px;
