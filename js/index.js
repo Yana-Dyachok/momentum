@@ -551,6 +551,7 @@ const toDoBlock=document.querySelector('.todo-block');
 const addButton=document.querySelector('.add-todo-btn');
 const toDoTaskList= document.querySelector('.todo-task-list');
 const titleProgressTasks=document.querySelector('.title-progress-tasks');
+
 function addTasks() { 
 if(inputToDo.value==='') {
     alert(
@@ -567,29 +568,35 @@ if(inputToDo.value==='') {
     toDoTaskList.appendChild(task)
   }
   inputToDo.value='';
+  getCheckedTask();
+  returnCheckedTask();
 }
 
-function getCheckedTask(event) {
-    if (event.target.tagName === 'LI') {
-        event.target.classList.toggle('checked');
-        titleProgressTasks.textContent = settings.options.language === 'en'
-            ? "Your progress"
-            : "Ваш прогрес";
-            progressTasks.appendChild(event.target);
-    } else if (event.target.tagName === 'SPAN') {
-        event.target.parentElement.remove();
-    }
+function getCheckedTask() {
+    toDoTaskList.addEventListener('click', (event)=>{
+        if (event.target.tagName === 'LI') {
+            event.target.classList.toggle('checked');
+            titleProgressTasks.textContent = settings.options.language === 'en'
+                ? "Your progress"
+                : "Ваш прогрес";
+                progressTasks.appendChild(event.target);
+        } else if (event.target.tagName === 'SPAN') {
+            event.target.parentElement.remove();
+        }
+    })
 }
 
-function returnCheckedTask(event) {
-    if (event.target.tagName === 'LI') {
-        event.target.classList.toggle('checked');
-            toDoTaskList.appendChild(event.target);
-        if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
-    } else if (event.target.tagName === 'SPAN') {
-        event.target.parentElement.remove();
-        if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
-    }
+function returnCheckedTask() {
+    progressTasks.addEventListener('click', (event)=>{
+        if (event.target.tagName === 'LI') {
+            event.target.classList.toggle('checked');
+                toDoTaskList.appendChild(event.target);
+            if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+        } else if (event.target.tagName === 'SPAN') {
+            event.target.parentElement.remove();
+            if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+        }
+    })
 }
 
 addButton.addEventListener('click',  addTasks);
@@ -599,7 +606,11 @@ inputToDo.addEventListener('keydown', (event)=> {
 
 toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
 overlay.addEventListener('click',()=>closeAplications(toDoBlock));
-toDoTaskList.addEventListener('click', getCheckedTask)
-progressTasks.addEventListener('click', returnCheckedTask)
+ 
+function setLocalStorage() {
+    localStorage.setItem('todo', JSON.stringify(addTasks));
+}
 
+function getLocalStorage() {
 
+}
