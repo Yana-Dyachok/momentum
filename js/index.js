@@ -399,7 +399,8 @@ const swichBlocks = document.querySelectorAll('.swich-block');
 const indicator = document.querySelectorAll('.indicator');
 const inputToDo=document.querySelector('.input-todo')
 const optionsName = document.querySelectorAll('.options-name');
-const toDoText=document.querySelectorAll('.todo-text')
+const toDoText=document.querySelectorAll('.todo-text');
+const progressTasks=  document.querySelector('.progress-tasks');
 let onToggle = [];
 let offToggle = [];
 
@@ -447,8 +448,8 @@ function changeSettingsLanguage() {
         'Tag',
     ];
 
-const enToDo=['ToDo list', 'Add'];
-const ukToDo=['Список справ', 'Додати'];
+const enToDo=['ToDo list', 'Add', 'Your progress'];
+const ukToDo=['Список справ', 'Додати', 'Ваш прогрес'];
 
     if (settings.options.language === 'en') {
         optionsName.forEach((el, i) => {
@@ -467,6 +468,7 @@ const ukToDo=['Список справ', 'Додати'];
         
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = enToDo[i];
+            toDoText[toDoText.length-1].textContent = (progressTasks.childElementCount === 0) ? '' : enToDo[toDoText.length-1];
         });
 
         inputToDo.placeholder ='Add task to be done';
@@ -485,9 +487,9 @@ const ukToDo=['Список справ', 'Додати'];
             offToggle[0].textContent = 'Укр';
             offToggle[i].textContent = 'Викл';
         });
-
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = ukToDo[i];
+            toDoText[toDoText.length-1].textContent = (progressTasks.childElementCount === 0) ? '' : ukToDo[toDoText.length-1];
         });
         inputToDo.placeholder ='Додайте завдання, для виконання';
     }
@@ -547,7 +549,8 @@ indicator.forEach((btn, i) => {
 const toDoBtn=document.querySelector('.todo-icon');
 const toDoBlock=document.querySelector('.todo-block');
 const addButton=document.querySelector('.add-todo-btn');
-
+const toDoTaskList= document.querySelector('.todo-task-list');
+const titleProgressTasks=document.querySelector('.title-progress-tasks');
 function addTasks() { 
 if(inputToDo.value==='') {
     alert(
@@ -561,10 +564,33 @@ if(inputToDo.value==='') {
     let span=document.createElement('span');
     span.setAttribute("class", "span-task");
     task.appendChild(span);
-    document.querySelector('.todo-task-list').appendChild(task)
+    toDoTaskList.appendChild(task)
   }
+  inputToDo.value='';
 }
 
+function getCheckedTask(event) {
+    if (event.target.tagName === 'LI') {
+        event.target.classList.toggle('checked');
+        titleProgressTasks.textContent = settings.options.language === 'en'
+            ? "Your progress"
+            : "Ваш прогрес";
+            progressTasks.appendChild(event.target);
+    } else if (event.target.tagName === 'SPAN') {
+        event.target.parentElement.remove();
+    }
+}
+
+function returnCheckedTask(event) {
+    if (event.target.tagName === 'LI') {
+        event.target.classList.toggle('checked');
+            toDoTaskList.appendChild(event.target);
+        if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+    } else if (event.target.tagName === 'SPAN') {
+        event.target.parentElement.remove();
+        if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+    }
+}
 
 addButton.addEventListener('click',  addTasks);
 inputToDo.addEventListener('keydown', (event)=> {
@@ -573,4 +599,7 @@ inputToDo.addEventListener('keydown', (event)=> {
 
 toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
 overlay.addEventListener('click',()=>closeAplications(toDoBlock));
+toDoTaskList.addEventListener('click', getCheckedTask)
+progressTasks.addEventListener('click', returnCheckedTask)
+
 

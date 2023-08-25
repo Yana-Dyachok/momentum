@@ -344,16 +344,19 @@ body {
 
 .todo-block {
     position: fixed;
-    width: 300px;
-    min-height: 200px;
     bottom: 90px;
     left: 40px;
+    width: 100%;
+    max-width: 400px; 
+    min-height: 200px;
+    max-height: 500px;
     padding: 30px;
     border-radius: 10px;
     background-color: rgba(15, 153, 198, 0.4);
     transition: transform 0.5s ease-out, top 0.5s ease-out;
     transform: translateY(160%);
     z-index: 99;
+    overflow: auto;
 }
 
 .todo-block.active {
@@ -362,21 +365,22 @@ body {
 }
 
 .input-todo-block {
-    width: 240px;
-    height: 30px;
     display: flex;
     border-radius: 10px;
     background-color: #ffffff;
 }
 
 .input-todo {
-    width: 100%;
+    flex-grow: 1; 
     border: 0;
     outline: 0;
     padding-left: 10px;
     font-size: 16px;
     border: none;
     border-radius: 10px 0px 0px 10px;
+    width: 130px;
+    max-width: 100%; 
+    box-sizing: border-box; 
 }
 
 .input-todo::placeholder {
@@ -385,7 +389,7 @@ body {
 }
 
 .add-todo-btn {
-    width: 70px;
+    min-width: 70px;
     height: 30px;
     color: #ffffff;
     border: none;
@@ -400,11 +404,13 @@ body {
 }
 
 .todo-task-list {
+    flex-grow: 1; 
     padding-top: 10px;
 }
 
-.todo-task-list li {
-    padding: 8px;
+.todo-task-list li,
+.progress-tasks li {
+    padding: 10px 5px;
     list-style: none;
     user-select: none;
     cursor: pointer;
@@ -417,26 +423,44 @@ body {
     height: 18px;
     width: 18px;
     top: 8px;
-    left: 10px;
+    left: 0;
     border-radius: 50%;
     background: url(../assets/logo/icons8-circle-40.png) center/cover;
 }
 
-.todo-task-list li.checked {
+.title-progress-tasks,
+.title-todo {
+    padding:5px 0px 10px;
+    color: #00ffff;
+    font-weight: 700;
+}
+
+.progress-tasks li.checked {
     text-decoration: line-through;
 }
 
-.todo-task-list li.checked::before {
+.progress-tasks li::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    top: 8px;
+    left:0;
     background: url(../assets/logo/icons8-checked-48.png) center/cover;
 }
 
-.span-task::before  {
+.progress-tasks li.checked::before {
+    background: url(../assets/logo/icons8-checked-48.png) center/cover;
+}
+
+.todo-task-list .span-task::before,
+.progress-tasks .span-task::before {
     content: '';
     position: absolute;
     height: 20px;
     width: 20px;
     top: 8px;
-    right: 15px;
+    right:0;
     background: url(../assets/logo/icons8-x-40.png) center/cover;
     cursor: pointer;
 }
