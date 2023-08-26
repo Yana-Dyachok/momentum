@@ -3,6 +3,12 @@
     src: url('../assets/fonts/Arial-MT.woff');
 }
 
+:root {
+    --white:#ffffff;
+    --aqua:#00ffff;
+    --brown:#312f2f;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,7 +21,7 @@ body {
 
     font-family: 'Arial', sans-serif;
     font-size: 16px;
-    color: #ffffff;
+    color: var(--white);
     text-align: center;
     background: url('../assets/img/bg.jpg') center/cover, rgba(0, 0, 0, 0.5);
     background-blend-mode: multiply;
@@ -41,7 +47,7 @@ body {
     width: 170px;
     height: 10px;
     margin-bottom: 15px;
-    background-color: #ffffff;
+    background-color: var(--white);
     border-radius: 20px;
 }
 
@@ -49,11 +55,11 @@ body {
     width: 0%;
     height: 10px;
     border-radius: 20px;
-    background-color: #00ffff;
+    background-color: var(--aqua);
 }
 
 .name-song {
-    color: #00ffff;
+    color: var(--aqua);
 }
 
 .player-controls {
@@ -171,7 +177,7 @@ body {
 .progress-sound {
     width: 145px;
     height: 10px;
-    background-color: #ffffff;
+    background-color: var(--white);
     border-radius: 20px;
 }
 /* weather------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -208,16 +214,16 @@ body {
     padding: 5px;
     font-size: 20px;
     line-height: 24px;
-    color: #ffffff;
+    color: var(--white);
     border: 0;
     outline: 0;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid var(--white);
     background-color: transparent;
 }
 
 .city::placeholder {
     font-size: 20px;
-    color: #ffffff;
+    color: var(--white);
     opacity: 0.6;
 }
 
@@ -288,14 +294,14 @@ body {
     padding: 10px;
     font-size: 40px;
     text-align: left;
-    color: #ffffff;
+    color: var(--white);
     background-color: transparent;
     border: 0;
     outline: 0;
 }
 
 .name::placeholder {
-    color: #ffffff;
+    color: var(--white);
     opacity: 0.6;
 }
 
@@ -367,7 +373,7 @@ body {
 .input-todo-block {
     display: flex;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: var(--white);
 }
 
 .input-todo {
@@ -384,14 +390,14 @@ body {
 }
 
 .input-todo::placeholder {
-    color: #312f2f;
+    color: var(--brown);
     opacity: 0.6;
 }
 
 .add-todo-btn {
     min-width: 70px;
     height: 30px;
-    color: #ffffff;
+    color: var(--white);
     border: none;
     background-color: #2e90bd;
     border-radius: 0px 10px 10px 0px;
@@ -399,8 +405,8 @@ body {
 }
 
 .add-todo-btn:hover {
-    color: #312f2f;
-    background-color: #00ffff;
+    color: var(--brown);
+    background-color: var(--aqua);
 }
 
 .todo-task-list {
@@ -431,7 +437,7 @@ body {
 .title-progress-tasks,
 .title-todo {
     padding:5px 0px 10px;
-    color: #00ffff;
+    color: var(--aqua);
     font-weight: 700;
 }
 
@@ -543,7 +549,7 @@ body {
     top: 0;
     left: 1px;
     border-radius: 10px;
-    background: linear-gradient(to bottom, #0b4661, #00ffff);
+    background: linear-gradient(to bottom, #0b4661, var(--aqua));
     transition: 0.3s ease-out;
     cursor: pointer;
 }
@@ -572,7 +578,7 @@ body {
 .footer-item {
     list-style: none;
     text-decoration: none;
-    color: #ffffff;
+    color: var(--white);
 }
 
 .footer-link {
@@ -583,7 +589,7 @@ body {
 .settings-icon:hover,
 .todo-icon:hover,
 .footer-link:hover {
-    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem #76f8f8);
+    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem var(--aqua));
     transform: scale(1.1);
     cursor: pointer;
 }

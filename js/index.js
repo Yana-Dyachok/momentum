@@ -607,10 +607,10 @@ inputToDo.addEventListener('keydown', (event)=> {
 toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
 overlay.addEventListener('click',()=>closeAplications(toDoBlock));
  
-function setLocalStorage() {
-    localStorage.setItem('todo', JSON.stringify(addTasks));
-}
+// function setLocalStorage() {
+//     localStorage.setItem('todo', JSON.stringify(addTasks));
+// }
 
-function getLocalStorage() {
+// function getLocalStorage() {
 
-}
+// }
