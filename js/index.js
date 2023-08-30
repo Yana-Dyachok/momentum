@@ -1,3 +1,4 @@
+import './audio-player.js';
 let settings = {
     options: {
         time: 'true',
@@ -223,184 +224,16 @@ async function getQuotes() {
 getQuotes();
 changeQuote.addEventListener('click', getQuotes);
 
-/*6. Audio player */
-// const playPrev = document.querySelector('.play-prev');
-// const play = document.querySelector('.play');
-// const playNext = document.querySelector('.play-next');
-// const audio = document.querySelector('audio');
-// const switchSound = document.querySelector('.switch-sound');
-// let isPlay = false;
-// let playNum = 0;
-
-// function playAudio() {
-//     if (isPlay) {
-//         isPlay = true;
-//         audio.play();
-//         play.classList.add('pause');
-//     } else {
-//         isPlay = false;
-//         audio.pause();
-//         play.classList.remove('pause');
-//     }
-// }
-
-// function toggleSound() {
-//     switchSound.classList.toggle('off-sound');
-// }
-
-// function pauseAudio() {
-//     if (isPlay) {
-//         isPlay = false;
-//         audio.pause();
-//     } else {
-//         isPlay = true;
-//         audio.play();
-//     }
-// }
-
-// function toggleBtn() {
-//     play.classList.toggle('pause');
-// }
-
-// function getplayNext() {
-//     if (playNum < playList.length - 1) playNum++;
-//     else {
-//         playNum = 0;
-//     }
-//     const currentItem = document.querySelectorAll('.play-item')[playNum];
-//     const prevItem =
-//         document.querySelectorAll('.play-item')[
-//             playNum === 0 ? playList.length - 1 : playNum - 1
-//         ];
-//     currentItem.classList.add('item-active');
-//     prevItem.classList.remove('item-active');
-//     audio.src = playList[playNum].src;
-//     playAudio();
-// }
-
-// function getplayPrev() {
-//     if (playNum > 0) playNum--;
-//     else {
-//         playNum = playList.length - 1;
-//     }
-//     const currentItem = document.querySelectorAll('.play-item')[playNum];
-//     const nextItem =
-//         document.querySelectorAll('.play-item')[
-//             (playNum + 1) % playList.length
-//         ];
-//     currentItem.classList.add('item-active');
-//     nextItem.classList.remove('item-active');
-//     audio.src = playList[playNum].src;
-//     playAudio();
-// }
-
-// play.addEventListener('click', toggleBtn);
-// playPrev.addEventListener('click', getplayPrev);
-// play.addEventListener('click', pauseAudio);
-// playNext.addEventListener('click', getplayNext);
-// switchSound.addEventListener('click', toggleSound);
-
-const playPrev = document.querySelector('.play-prev');
-const play = document.querySelector('.play');
-const playNext = document.querySelector('.play-next');
-const audio = document.querySelector('audio');
-const nameSong = document.querySelector('.name-song');
-const playItem = document.querySelector('.play-item');
-const progressed = document.querySelector('.progressed');
-const switchSound = document.querySelector('.switch-sound');
-let isPlay = false;
-let playNum = 0;
-nameSong.textContent = playItem.textContent;
-function playAudio() {
-    if (isPlay) {
-        isPlay = true;
-        audio.play();
-        play.classList.add('pause');
-    } else {
-        isPlay = false;
-        audio.pause();
-        play.classList.remove('pause');
-    }
-}
-
-function pauseAudio() {
-    if (isPlay) {
-        isPlay = false;
-        audio.pause();
-    } else {
-        isPlay = true;
-        audio.play();
-    }
-}
-
-function toggleBtn() {
-    play.classList.toggle('pause');
-}
-
-function getplayNext() {
-    if (playNum < playList.length - 1) playNum++;
-    else {
-        playNum = 0;
-    }
-    const currentAudio = document.querySelectorAll('.play-audio')[playNum];
-    const currentItem = document.querySelectorAll('.play-item')[playNum];
-    const prevItem =
-        document.querySelectorAll('.play-item')[
-            playNum === 0 ? playList.length - 1 : playNum - 1
-        ];
-    currentItem.classList.add('item-active');
-    prevItem.classList.remove('item-active');
-    nameSong.textContent = currentItem.textContent;
-    currentAudio.ntimeupdate = progressBar(currentAudio);
-    audio.src = playList[playNum].src;
-    playAudio();
-}
-
-function getplayPrev() {
-    if (playNum > 0) playNum--;
-    else {
-        playNum = playList.length - 1;
-    }
-    const currentAudio = document.querySelectorAll('.play-audio')[playNum];
-    const currentItem = document.querySelectorAll('.play-item')[playNum];
-    const nextItem =
-        document.querySelectorAll('.play-item')[
-            (playNum + 1) % playList.length
-        ];
-    currentItem.classList.add('item-active');
-    nextItem.classList.remove('item-active');
-    nameSong.textContent = currentItem.textContent;
-    currentAudio.ntimeupdate = progressBar(currentAudio);
-    audio.src = playList[playNum].src;
-    playAudio();
-}
-
-function progressBar(elem) {
-    progressed.style.width = ~~80 + '%';
-}
-
-function toggleSound() {
-    switchSound.classList.toggle('off-sound');
-}
-
-play.addEventListener('click', toggleBtn);
-playPrev.addEventListener('click', getplayPrev);
-play.addEventListener('click', pauseAudio);
-playNext.addEventListener('click', getplayNext);
-switchSound.addEventListener('click', toggleSound);
-
-import playList from './playlist.js';
-
 // settings------------------------------------------------------------
 const settingBtn = document.querySelector('.settings-icon');
 const overlay = document.querySelector('.overlay');
 const settingsBlock = document.querySelector('.settings-block');
 const swichBlocks = document.querySelectorAll('.swich-block');
 const indicator = document.querySelectorAll('.indicator');
-const inputToDo=document.querySelector('.input-todo')
+const inputToDo = document.querySelector('.input-todo');
 const optionsName = document.querySelectorAll('.options-name');
-const toDoText=document.querySelectorAll('.todo-text');
-const progressTasks=  document.querySelector('.progress-tasks');
+const toDoText = document.querySelectorAll('.todo-text');
+const progressTasks = document.querySelector('.progress-tasks');
 let onToggle = [];
 let offToggle = [];
 
@@ -448,8 +281,8 @@ function changeSettingsLanguage() {
         'Tag',
     ];
 
-const enToDo=['ToDo list', 'Add', 'Your progress'];
-const ukToDo=['Список справ', 'Додати', 'Ваш прогрес'];
+    const enToDo = ['ToDo list', 'Add', 'Your progress'];
+    const ukToDo = ['Список справ', 'Додати', 'Ваш прогрес'];
 
     if (settings.options.language === 'en') {
         optionsName.forEach((el, i) => {
@@ -465,14 +298,16 @@ const ukToDo=['Список справ', 'Додати', 'Ваш прогрес'
             offToggle[0].textContent = 'Uk';
             offToggle[i].textContent = 'Off';
         });
-        
+
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = enToDo[i];
-            toDoText[toDoText.length-1].textContent = (progressTasks.childElementCount === 0) ? '' : enToDo[toDoText.length-1];
+            toDoText[toDoText.length - 1].textContent =
+                progressTasks.childElementCount === 0
+                    ? ''
+                    : enToDo[toDoText.length - 1];
         });
 
-        inputToDo.placeholder ='Add task to be done';
-
+        inputToDo.placeholder = 'Add task to be done';
     } else {
         optionsName.forEach((el, i) => {
             optionsName[i].textContent = ukSettings[i];
@@ -489,9 +324,12 @@ const ukToDo=['Список справ', 'Додати', 'Ваш прогрес'
         });
         toDoText.forEach((el, i) => {
             toDoText[i].textContent = ukToDo[i];
-            toDoText[toDoText.length-1].textContent = (progressTasks.childElementCount === 0) ? '' : ukToDo[toDoText.length-1];
+            toDoText[toDoText.length - 1].textContent =
+                progressTasks.childElementCount === 0
+                    ? ''
+                    : ukToDo[toDoText.length - 1];
         });
-        inputToDo.placeholder ='Додайте завдання, для виконання';
+        inputToDo.placeholder = 'Додайте завдання, для виконання';
     }
 
     getQuotes();
@@ -546,67 +384,70 @@ indicator.forEach((btn, i) => {
 });
 
 // todo list----------------------------------------------------------------------------------
-const toDoBtn=document.querySelector('.todo-icon');
-const toDoBlock=document.querySelector('.todo-block');
-const addButton=document.querySelector('.add-todo-btn');
-const toDoTaskList= document.querySelector('.todo-task-list');
-const titleProgressTasks=document.querySelector('.title-progress-tasks');
+const toDoBtn = document.querySelector('.todo-icon');
+const toDoBlock = document.querySelector('.todo-block');
+const addButton = document.querySelector('.add-todo-btn');
+const toDoTaskList = document.querySelector('.todo-task-list');
+const titleProgressTasks = document.querySelector('.title-progress-tasks');
 
-function addTasks() { 
-if(inputToDo.value==='') {
-    alert(
-    settings.options.language === 'en'
-    ? "You should write something"
-    : "Ви повинні щось написати"
-  )}
-  else {
-    let task=document.createElement('li');
-    task.innerHTML=inputToDo.value;
-    let span=document.createElement('span');
-    span.setAttribute("class", "span-task");
-    task.appendChild(span);
-    toDoTaskList.appendChild(task)
-  }
-  inputToDo.value='';
-  getCheckedTask();
-  returnCheckedTask();
+function addTasks() {
+    if (inputToDo.value === '') {
+        alert(
+            settings.options.language === 'en'
+                ? 'You should write something'
+                : 'Ви повинні щось написати'
+        );
+    } else {
+        let task = document.createElement('li');
+        task.innerHTML = inputToDo.value;
+        let span = document.createElement('span');
+        span.setAttribute('class', 'span-task');
+        task.appendChild(span);
+        toDoTaskList.appendChild(task);
+    }
+    inputToDo.value = '';
+    getCheckedTask();
+    returnCheckedTask();
 }
 
 function getCheckedTask() {
-    toDoTaskList.addEventListener('click', (event)=>{
+    toDoTaskList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             event.target.classList.toggle('checked');
-            titleProgressTasks.textContent = settings.options.language === 'en'
-                ? "Your progress"
-                : "Ваш прогрес";
-                progressTasks.appendChild(event.target);
+            titleProgressTasks.textContent =
+                settings.options.language === 'en'
+                    ? 'Your progress'
+                    : 'Ваш прогрес';
+            progressTasks.appendChild(event.target);
         } else if (event.target.tagName === 'SPAN') {
             event.target.parentElement.remove();
         }
-    })
+    });
 }
 
 function returnCheckedTask() {
-    progressTasks.addEventListener('click', (event)=>{
+    progressTasks.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             event.target.classList.toggle('checked');
-                toDoTaskList.appendChild(event.target);
-            if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+            toDoTaskList.appendChild(event.target);
+            if (progressTasks.childElementCount === 0)
+                titleProgressTasks.textContent = '';
         } else if (event.target.tagName === 'SPAN') {
             event.target.parentElement.remove();
-            if (progressTasks.childElementCount===0)titleProgressTasks.textContent ='';
+            if (progressTasks.childElementCount === 0)
+                titleProgressTasks.textContent = '';
         }
-    })
+    });
 }
 
-addButton.addEventListener('click',  addTasks);
-inputToDo.addEventListener('keydown', (event)=> {
-    if (event.key === 'Enter')addTasks();
+addButton.addEventListener('click', addTasks);
+inputToDo.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') addTasks();
 });
 
-toDoBtn.addEventListener('click',()=>openAplications(toDoBlock));
-overlay.addEventListener('click',()=>closeAplications(toDoBlock));
- 
+toDoBtn.addEventListener('click', () => openAplications(toDoBlock));
+overlay.addEventListener('click', () => closeAplications(toDoBlock));
+
 // function setLocalStorage() {
 //     localStorage.setItem('todo', JSON.stringify(addTasks));
 // }

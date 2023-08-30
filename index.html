@@ -17,47 +17,23 @@
                     <button class="play player-icon"></button>
                     <button class="play-next player-icon"></button>
                 </div>
-                <figure>
-                    <figcaption class="name-song"></figcaption>
-                    <div class="progress-bar-audio">
-                        <div class="progressed"></div>
+                <div class="progress-block">
+                  <p class="name-song"></p>
+                  <div class="slider-container">
+                    <div class="current-time">0:00</div>
+                    <div class="timeline">
+                        <div class="progress"></div>
                     </div>
-                </figure>
-                <div class="sound-adjustment">
-                    <button class="switch-sound"></button>
-                    <div class="progress-sound"></div>
-                    <div class="progressed-sound"></div>
+                    <div class="total-duration">00:00</div>         
+                  </div>
                 </div>
-                <ul class="play-list">
-                    <li class="play-item">
-                        <audio
-                            class="play-audio"
-                            src="./assets/sounds/Aqua Caelestis.mp3"
-                        ></audio
-                        >Aqua Caelestis
-                    </li>
-                    <li class="play-item">
-                        <audio
-                            class="play-audio"
-                            src="./assets/sounds/River Flows In You.mp3"
-                        ></audio
-                        >River Flows In You
-                    </li>
-                    <li class="play-item">
-                        <audio
-                            class="play-audio"
-                            src="./assets/sounds/Summer Wind.mp3"
-                        ></audio
-                        >Summer Wind
-                    </li>
-                    <li class="play-item">
-                        <audio
-                            class="play-audio"
-                            src="./assets/sounds/Ennio Morricone.mp3"
-                        ></audio
-                        >Ennio Morricone
-                    </li>
-                </ul>
+                  <div class="volume-container">
+                    <div class="switch-sound"></div>
+                    <div class="volume-bar">
+                      <div class="volume-bar-progressed"></div>
+                    </div>
+                  </div>
+                <ul class="play-list"></ul>
             </div>
             <div class="weather">
                 <input type="text" class="city" />
