@@ -72,11 +72,14 @@ body {
 
 .player-icon:hover,
 .slider-icon:hover,
-.change-quote:hover {
-    opacity: 1;
-    cursor: pointer;
-    transition: 0.3s;
+.change-quote:hover,
+.settings-icon:hover,
+.todo-icon:hover,
+.footer-link:hover {
+    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem var(--aqua));
     transform: scale(1.1);
+    cursor: pointer;
+    opacity: 1;
 }
 
 .player-icon:active,
@@ -632,14 +635,6 @@ body {
 .footer-link {
     padding: 0 40px;
     transition: box-shadow 0.7s ease-out 0s;
-}
-
-.settings-icon:hover,
-.todo-icon:hover,
-.footer-link:hover {
-    filter: drop-shadow(0.3125rem 0.3125rem 1.875rem var(--aqua));
-    transform: scale(1.1);
-    cursor: pointer;
 }
 
 @media (max-width: 768px) {
