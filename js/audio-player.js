@@ -34,16 +34,25 @@ function toggleBtn() {
     activeAudio();
 }
 
+function createPlayList() {
+    playList.forEach(el => {
+        const li = document.createElement('li');
+        li.classList.add('play-item');
+        li.textContent = el.title;
+        playListContainer.append(li);
+    })
+}
+
 function activeAudio() {
     document.querySelectorAll('.play-item').forEach((el, i) => {
         if(i !== playNum) {
             el.classList.remove('item-active');
-            el.classList.remove('playing');
+            el.classList.remove('item-pause');
         }
         else {
             el.classList.add('item-active');
-            if(el.classList.contains('playing')) el.classList.remove('playing');
-            else el.classList.add('playing');
+            if(el.classList.contains('item-pause')) el.classList.remove('item-pause');
+            else el.classList.add('item-pause');
             nameSong.textContent = playList[playNum].title;
             
         } 
@@ -51,9 +60,7 @@ function activeAudio() {
 }
 
 function playIfPaused() {
-    if (!isPlay) {
-        toggleBtn();
-    }
+    if (!isPlay)toggleBtn();
     else {
         playAudio();
         activeAudio();
@@ -73,24 +80,10 @@ function playPrev() {
     playIfPaused();
 }
 
-function createPlayList() {
-    playList.forEach(el => {
-        const li = document.createElement('li');
-        li.classList.add('play-item');
-        li.textContent = el.title;
-        playListContainer.append(li);
-    })
-}
-
 function playItem(element) {
     document.querySelectorAll('.play-item').forEach((el, i) => {
         if(el === element.target) {
-            if(playNum === i) {
-                if(!isPlay) playIfPaused();
-                else {
-                    toggleBtn();
-                }
-            }
+            if(playNum === i)(!isPlay)?playIfPaused():toggleBtn();
             else {
                 playNum = i;
                 getAudio();
@@ -114,8 +107,8 @@ function muteVolume() {
 }
 
 function updateVolume(event) {
-    const sliderWidth = window.getComputedStyle(volumeBar).width;
-    const newVolume = Math.abs(event.offsetX / parseInt(sliderWidth));
+    const volumWidth = window.getComputedStyle(volumeBar).width;
+    const newVolume = Math.abs(event.offsetX / parseInt(volumWidth));
     audio.volume = newVolume;
     volumBarProgressed.style.width = `${newVolume * 100}%`;
 
