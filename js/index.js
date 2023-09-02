@@ -100,10 +100,14 @@ window.addEventListener('load', getLocalStorage);
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
 
-function getRandomNum() {
-    return ~~(Math.random() * 20 + 1);
+const githubRadio = document.getElementById('check-github');
+const flickrRadio = document.getElementById('check-flickr');
+const unsplashRadio = document.getElementById('check-unsplash');
+
+function getRandomNum(n) {
+    return ~~(Math.random() * n + 1);
 }
-let randomNum = getRandomNum();
+let randomNum = getRandomNum(20);
 
 function setBackground() {
     const timeOfDay = getTimeOfDay();
@@ -116,24 +120,108 @@ function setBackground() {
     img.src = path;
 }
 
-setBackground();
+function onloadImg() {
+    settings.options.background === 'github'
+        ? setBackground()
+        : settings.options.background === 'unsplash'
+        ? getUnsplashImg(settings.tag)
+        : getFlickrImg(settings.tag);
+}
+
+onloadImg();
 
 function getSlideNext() {
-    if (randomNum < 20) randomNum += 1;
+    if (settings.options.background === 'github') {
+        randomNum = randomNum < 20 ? randomNum + 1 : 1;
+        setBackground();
+    } else if (settings.options.background === 'unsplash')
+        getUnsplashImg(settings.tag);
     else {
-        randomNum = 1;
+        getFlickrImg(settings.tag);
     }
-    setBackground();
 }
+
 function getSlidePrev() {
-    if (randomNum > 1) randomNum -= 1;
+    if (settings.options.background === 'github') {
+        randomNum = randomNum > 1 ? randomNum - 1 : 20;
+        setBackground();
+    } else if (settings.options.background === 'unsplash')
+        getUnsplashImg(settings.tag);
     else {
-        randomNum = 20;
+        getFlickrImg(settings.tag);
     }
-    setBackground();
 }
+
 slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
+
+/*9. get API img*/
+const tagName = document.querySelector('.background-tag');
+async function getUnsplashImg(tag) {
+    const img = new Image();
+    const newTag = tag || getTimeOfDay();
+    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${newTag}&client_id=YT15YapXlxDujdcx8yVKchvJr__eZFPF8-EK0LAvIso`;
+    const result = await fetch(url);
+    const data = await result.json();
+
+    try {
+        img.src = data.urls.regular;
+    } catch {
+        if (result.status === 403) {
+            alert('Error to Unsplash access');
+        }
+        if (result.status === 404) {
+            alert(
+                'No images were found for this tag \nTry to enter a different tag!'
+            );
+        }
+        settings.tag = '';
+        tagName.value = '';
+    }
+    img.onload = () => {
+        document.body.style.backgroundImage = `url('${data.urls.regular}')`;
+    };
+}
+async function getFlickrImg(tag) {
+    const image = new Image();
+    const newTag = tag || getTimeOfDay();
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=487d107c09bb457a77c8ebf709668f30&tags=${newTag}&extras=url_l&format=json&nojsoncallback=1`;
+    const result = await fetch(url);
+    const data = await result.json();
+    
+    if (data.stat === 'fail') {
+        alert(
+            'Error to  Flickr access'
+        );
+    } else {
+        try {
+            if (data.photos.photo.length > 0) {
+                let randomIndex = getRandomNum(data.photos.photo.length);
+                image.src = data.photos.photo[randomIndex].url_l; 
+            } else {
+                throw new Error("No photos found for this tag.");
+            }
+        } catch {
+            alert(
+                'No images were found for this tag \nTry to enter a different tag!'
+            );
+            settings.tag = '';
+            tagName.value = '';
+        }
+    }
+
+    image.onload = () => {
+        document.body.style.backgroundImage = `url('${data.photos.photo[getRandomNum(data.photos.photo.length)].url_l}')`;
+    };
+}     
+
+
+function searchByTag() {
+    settings.tag = tagName.value;
+    onloadImg();
+}
+
+tagName.addEventListener('change', searchByTag);
 
 /*4. Weather widget */
 const weatherIcon = document.querySelector('.weather-icon');
@@ -205,17 +293,13 @@ const quote = document.querySelector('.quote');
 const changeQuote = document.querySelector('.change-quote');
 const author = document.querySelector('.author');
 
-function getQuoteIndex() {
-    return ~~(Math.random() * 50);
-}
-
 async function getQuotes() {
     let res =
         settings.options.language === 'en'
             ? await fetch('./js/data.json')
             : await fetch('./js/datauk.json');
     const data = await res.json();
-    const randomQuote = getQuoteIndex();
+    const randomQuote = getRandomNum(49);
     const { quote: text, author: authorName } = data[randomQuote];
     quote.textContent = text;
     author.textContent = authorName;
@@ -224,7 +308,7 @@ async function getQuotes() {
 getQuotes();
 changeQuote.addEventListener('click', getQuotes);
 
-// settings------------------------------------------------------------
+/*10.settings------------------------------------------------------------*/
 const settingBtn = document.querySelector('.settings-icon');
 const overlay = document.querySelector('.overlay');
 const settingsBlock = document.querySelector('.settings-block');
@@ -382,6 +466,36 @@ indicator.forEach((btn, i) => {
         }
     });
 });
+
+function determineSelectedRadio() {
+  if (githubRadio.checked) {
+    settings.options.background ='github';
+    document.querySelector('.tag-block').style.visibility ='hidden';
+    onloadImg();
+  } else if (flickrRadio.checked) {
+    settings.options.background ='flickr';
+    document.querySelector('.tag-block').style.visibility ='visible';
+    onloadImg();
+  } else if (unsplashRadio.checked) {
+    settings.options.background ='unsplash';
+    document.querySelector('.tag-block').style.visibility ='visible';
+    onloadImg();
+  } else {
+    settings.options.background ='github';
+    document.querySelector('.tag-block').style.visibility ='hidden';
+    onloadImg();
+  }
+}
+
+function checkedImgRadioBtn() {
+githubRadio.addEventListener('change',determineSelectedRadio);
+  
+flickrRadio.addEventListener('change',determineSelectedRadio);
+  
+unsplashRadio.addEventListener('change',determineSelectedRadio);
+}
+
+checkedImgRadioBtn()
 
 // todo list----------------------------------------------------------------------------------
 const toDoBtn = document.querySelector('.todo-icon');
