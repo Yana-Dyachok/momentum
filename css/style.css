@@ -228,8 +228,8 @@ body {
 }
 
 .item-pause::before {
-    background-image: url("../assets/player-logo/pause.svg");
-  }
+    background-image: url('../assets/player-logo/pause.svg');
+}
 
 /* weather------------------------------------------------------------------------------------------------------------------------------------------------ */
 .weather {
@@ -619,6 +619,10 @@ body {
     padding-bottom: 5px;
 }
 
+.radio {
+    cursor: pointer;
+}
+
 .tag-block {
     visibility: hidden;
 }
@@ -632,6 +636,8 @@ body {
     outline: none;
     border-radius: 20px;
 }
+
+/* footer-links------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .footer-list {
     display: flex;
@@ -652,6 +658,7 @@ body {
 }
 
 @media (max-width: 768px) {
+    
     .time {
         min-height: 80px;
         font-size: 72px;
@@ -670,4 +677,13 @@ body {
         font-size: 32px;
         padding: 5px;
     }
+
+    .settings-block {
+        background-color: rgba(15, 153, 198, 0.7);
+    }
+
+    .todo-block {
+        background-color: rgba(15, 153, 198, 0.7);
+    }
+
 }
