@@ -107,6 +107,7 @@ const unsplashRadio = document.getElementById('check-unsplash');
 function getRandomNum(n) {
     return ~~(Math.random() * n + 1);
 }
+
 let randomNum = getRandomNum(20);
 
 function setBackground() {
@@ -154,74 +155,6 @@ function getSlidePrev() {
 
 slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
-
-/*9. get API img*/
-const tagName = document.querySelector('.background-tag');
-async function getUnsplashImg(tag) {
-    const img = new Image();
-    const newTag = tag || getTimeOfDay();
-    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${newTag}&client_id=YT15YapXlxDujdcx8yVKchvJr__eZFPF8-EK0LAvIso`;
-    const result = await fetch(url);
-    const data = await result.json();
-
-    try {
-        img.src = data.urls.regular;
-    } catch {
-        if (result.status === 403) {
-            alert('Error to Unsplash access');
-        }
-        if (result.status === 404) {
-            alert(
-                'No images were found for this tag \nTry to enter a different tag!'
-            );
-        }
-        settings.tag = '';
-        tagName.value = '';
-    }
-    img.onload = () => {
-        document.body.style.backgroundImage = `url('${data.urls.regular}')`;
-    };
-}
-async function getFlickrImg(tag) {
-    const image = new Image();
-    const newTag = tag || getTimeOfDay();
-    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=487d107c09bb457a77c8ebf709668f30&tags=${newTag}&extras=url_l&format=json&nojsoncallback=1`;
-    const result = await fetch(url);
-    const data = await result.json();
-    
-    if (data.stat === 'fail') {
-        alert(
-            'Error to  Flickr access'
-        );
-    } else {
-        try {
-            if (data.photos.photo.length > 0) {
-                let randomIndex = getRandomNum(data.photos.photo.length);
-                image.src = data.photos.photo[randomIndex].url_l; 
-            } else {
-                throw new Error("No photos found for this tag.");
-            }
-        } catch {
-            alert(
-                'No images were found for this tag \nTry to enter a different tag!'
-            );
-            settings.tag = '';
-            tagName.value = '';
-        }
-    }
-
-    image.onload = () => {
-        document.body.style.backgroundImage = `url('${data.photos.photo[getRandomNum(data.photos.photo.length)].url_l}')`;
-    };
-}     
-
-
-function searchByTag() {
-    settings.tag = tagName.value;
-    onloadImg();
-}
-
-tagName.addEventListener('change', searchByTag);
 
 /*4. Weather widget */
 const weatherIcon = document.querySelector('.weather-icon');
@@ -308,62 +241,14 @@ async function getQuotes() {
 getQuotes();
 changeQuote.addEventListener('click', getQuotes);
 
-/*10.settings------------------------------------------------------------*/
-const settingBtn = document.querySelector('.settings-icon');
-const overlay = document.querySelector('.overlay');
-const settingsBlock = document.querySelector('.settings-block');
-const swichBlocks = document.querySelectorAll('.swich-block');
-const indicator = document.querySelectorAll('.indicator');
+/*8. Application translation -----------------------------------------------------------------------------------------------------------------*/
 const inputToDo = document.querySelector('.input-todo');
 const optionsName = document.querySelectorAll('.options-name');
 const toDoText = document.querySelectorAll('.todo-text');
 const progressTasks = document.querySelector('.progress-tasks');
-let onToggle = [];
-let offToggle = [];
-
-swichBlocks.forEach((swichBlock) => {
-    onToggle.push(swichBlock.children[0]);
-    offToggle.push(swichBlock.children[swichBlock.children.length - 1]);
-});
-
-function openAplications(block) {
-    overlay.classList.add('target');
-    block.classList.add('active');
-}
-
-function closeAplications(block) {
-    overlay.classList.remove('target');
-    block.classList.remove('active');
-}
-
-settingBtn.addEventListener('click', () => openAplications(settingsBlock));
-overlay.addEventListener('click', () => closeAplications(settingsBlock));
-
 function changeSettingsLanguage() {
-    const ukSettings = [
-        'Мова',
-        'Плеєр',
-        'Погода',
-        'Час',
-        'Дата',
-        'Привітання',
-        'Цитата дня',
-        'Список справ',
-        'Фонове зображення',
-        'Тег',
-    ];
-    const enSettings = [
-        'Language',
-        'Player',
-        'Weather',
-        'Time',
-        'Date',
-        'Greeting',
-        'Quote',
-        'ToDo',
-        'Background Image',
-        'Tag',
-    ];
+    const ukSettings = ['Мова', 'Плеєр', 'Погода', 'Час', 'Дата', 'Привітання', 'Цитата дня', 'Список справ','Фонове зображення', 'Тег'];
+    const enSettings = ['Language','Player','Weather', 'Time', 'Date', 'Greeting', 'Quote', 'ToDo', 'Background Image', 'Tag'];
 
     const enToDo = ['ToDo list', 'Add', 'Your progress'];
     const ukToDo = ['Список справ', 'Додати', 'Ваш прогрес'];
@@ -392,6 +277,7 @@ function changeSettingsLanguage() {
         });
 
         inputToDo.placeholder = 'Add task to be done';
+        tagName.placeholder = 'Write your tag';
     } else {
         optionsName.forEach((el, i) => {
             optionsName[i].textContent = ukSettings[i];
@@ -414,6 +300,7 @@ function changeSettingsLanguage() {
                     : ukToDo[toDoText.length - 1];
         });
         inputToDo.placeholder = 'Додайте завдання, для виконання';
+        tagName.placeholder = 'Напишіть свій тег';
     }
 
     getQuotes();
@@ -421,39 +308,160 @@ function changeSettingsLanguage() {
     showTime();
 }
 
+/*9. Getting the background image from the API*/
+const tagName = document.querySelector('.background-tag');
+async function getUnsplashImg(tag) {
+    const img = new Image();
+    const newTag = tag || getTimeOfDay();
+    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${newTag}&client_id=YT15YapXlxDujdcx8yVKchvJr__eZFPF8-EK0LAvIso`;
+    const result = await fetch(url);
+    const data = await result.json();
+
+    try {
+        img.src = data.urls.regular;
+    } catch {
+        if (result.status === 403) {
+            alert(
+                settings.options.language === 'en'
+                    ? 'Error to Unsplash access'
+                    : 'Помилка доступу до Unsplash'
+            );
+        }
+        if (result.status === 404) {
+            alert(
+                settings.options.language === 'en'
+                    ? 'No images were found for this tag \nTry to enter a different tag!'
+                    : 'Для цього тегу не знайдено зображень \nСпробуйте ввести інший тег!'
+            );
+        }
+        settings.tag = '';
+        tagName.value = '';
+    }
+    img.onload = () => {
+        document.body.style.backgroundImage = `url('${data.urls.regular}')`;
+    };
+}
+async function getFlickrImg(tag) {
+    const image = new Image();
+    const newTag = tag || getTimeOfDay();
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=487d107c09bb457a77c8ebf709668f30&tags=${newTag}&extras=url_l&format=json&nojsoncallback=1`;
+    const result = await fetch(url);
+    const data = await result.json();
+    
+    if (data.stat === 'fail') {
+        alert(
+            settings.options.language === 'en'
+                ? 'Error to  Flickr access'
+                : 'Помилка доступу до  Flickr'
+        );
+    } else {
+        try {
+            if (data.photos.photo.length > 0) {
+                let randomIndex = getRandomNum(data.photos.photo.length);
+                image.src = data.photos.photo[randomIndex].url_l; 
+            } else {
+                throw new Error("No photos found for this tag.");
+            }
+        } catch {
+            alert(
+                settings.options.language === 'en'
+                    ? 'No images were found for this tag \nTry to enter a different tag!'
+                    : 'Для цього тегу не знайдено зображень \nСпробуйте ввести інший тег!'
+            );
+            settings.tag = '';
+            tagName.value = '';
+        }
+    }
+
+    image.onload = () => {
+        document.body.style.backgroundImage = `url('${data.photos.photo[getRandomNum(data.photos.photo.length)].url_l}')`;
+    };
+}     
+
+function determineSelectedRadio() {
+    if (githubRadio.checked) {
+      settings.options.background ='github';
+      document.querySelector('.tag-block').style.visibility ='hidden';
+      onloadImg();
+    } else if (flickrRadio.checked) {
+      settings.options.background ='flickr';
+      document.querySelector('.tag-block').style.visibility ='visible';
+      onloadImg();
+    } else if (unsplashRadio.checked) {
+      settings.options.background ='unsplash';
+      document.querySelector('.tag-block').style.visibility ='visible';
+      onloadImg();
+    } else {
+      settings.options.background ='github';
+      document.querySelector('.tag-block').style.visibility ='hidden';
+      onloadImg();
+    }
+  }
+  
+  function checkedImgRadioBtn() {
+  githubRadio.addEventListener('change',determineSelectedRadio);
+    
+  flickrRadio.addEventListener('change',determineSelectedRadio);
+    
+  unsplashRadio.addEventListener('change',determineSelectedRadio);
+  }
+  
+  checkedImgRadioBtn()
+
+function searchByTag() {
+    settings.tag = tagName.value;
+    onloadImg();
+}
+
+tagName.addEventListener('change', searchByTag);
+tagName.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') searchByTag();
+});
+
+/*10.Application settings------------------------------------------------------------*/
+const settingBtn = document.querySelector('.settings-icon');
+const overlay = document.querySelector('.overlay');
+const settingsBlock = document.querySelector('.settings-block');
+const swichBlocks = document.querySelectorAll('.swich-block');
+const indicator = document.querySelectorAll('.indicator');
+let onToggle = [];
+let offToggle = [];
+
+swichBlocks.forEach((swichBlock) => {
+    onToggle.push(swichBlock.children[0]);
+    offToggle.push(swichBlock.children[swichBlock.children.length - 1]);
+});
+
+function openAplications(block) {
+    overlay.classList.add('target');
+    block.classList.add('active');
+}
+
+function closeAplications(block) {
+    overlay.classList.remove('target');
+    block.classList.remove('active');
+}
+
+settingBtn.addEventListener('click', () => openAplications(settingsBlock));
+overlay.addEventListener('click', () => closeAplications(settingsBlock));
+
+
+
 function hideBlock(options, selector) {
     document.querySelector(selector).style.visibility =
         options === 'true' ? 'visible' : 'hidden';
 }
 
-const selectors = [
-    '.player',
-    '.weather',
-    '.time',
-    '.date',
-    '.greeting-container',
-    '.quote-block',
-    '.todo-list',
-];
+const selectors = ['.player', '.weather', '.time', '.date', '.greeting-container', '.quote-block', '.todo-list'];
 
 indicator.forEach((btn, i) => {
     btn.addEventListener('click', () => {
         btn.classList.toggle('active');
 
-        const optionProperties = [
-            'player',
-            'weather',
-            'time',
-            'date',
-            'greeting',
-            'quote',
-            'todo',
-        ];
+        const optionProperties = ['player','weather','time','date', 'greeting','quote','todo'];
 
         if (i === 0) {
-            settings.options.language = indicator[0].classList.contains(
-                'active'
-            )
+            settings.options.language = indicator[0].classList.contains('active')
                 ? 'uk'
                 : 'en';
             changeSettingsLanguage();
@@ -467,37 +475,7 @@ indicator.forEach((btn, i) => {
     });
 });
 
-function determineSelectedRadio() {
-  if (githubRadio.checked) {
-    settings.options.background ='github';
-    document.querySelector('.tag-block').style.visibility ='hidden';
-    onloadImg();
-  } else if (flickrRadio.checked) {
-    settings.options.background ='flickr';
-    document.querySelector('.tag-block').style.visibility ='visible';
-    onloadImg();
-  } else if (unsplashRadio.checked) {
-    settings.options.background ='unsplash';
-    document.querySelector('.tag-block').style.visibility ='visible';
-    onloadImg();
-  } else {
-    settings.options.background ='github';
-    document.querySelector('.tag-block').style.visibility ='hidden';
-    onloadImg();
-  }
-}
-
-function checkedImgRadioBtn() {
-githubRadio.addEventListener('change',determineSelectedRadio);
-  
-flickrRadio.addEventListener('change',determineSelectedRadio);
-  
-unsplashRadio.addEventListener('change',determineSelectedRadio);
-}
-
-checkedImgRadioBtn()
-
-// todo list----------------------------------------------------------------------------------
+/*11.Additional functionality. Todo list----------------------------------------------------------------------------------*/
 const toDoBtn = document.querySelector('.todo-icon');
 const toDoBlock = document.querySelector('.todo-block');
 const addButton = document.querySelector('.add-todo-btn');

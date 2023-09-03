@@ -1,4 +1,5 @@
 import playList from './playlist.js';
+/*6. Audio player----------------------------------------------------------------------------------------------------------------------------------------- */
 const button = document.querySelector('.play');
 const buttonNext = document.querySelector('.play-next');
 const buttonPrev = document.querySelector('.play-prev');
@@ -92,6 +93,8 @@ function playItem(element) {
         }
     })
 }
+
+/*7. Advanced audio player---------------------------------------------------------------------------------*/
 
 function muteVolume() {
     if(!audio.muted) {
