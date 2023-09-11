@@ -323,7 +323,7 @@ body {
 
 /* greeting--------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.greeting-container {
+.greeting {
     display: flex;
     flex-wrap: wrap;
     justify-content: stretch;
@@ -333,7 +333,7 @@ body {
     font-size: 40px;
 }
 
-.greeting {
+.greeting-text {
     flex: 1;
     padding: 0px 10px;
     text-align: right;
@@ -358,7 +358,7 @@ body {
 
 /* footer--------------------------------------------------------------------------------------------------------------------------------------------- */
 /*quote block---------------------------------------------------------------------------------------------------------------------------------------   */
-.quote-block {
+.quote {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -374,7 +374,7 @@ body {
     background-image: url('../assets/player-logo/reload.svg');
 }
 
-.quote {
+.quote-text {
     min-height: 32px;
 }
 
@@ -664,12 +664,12 @@ body {
         font-size: 72px;
     }
 
-    .greeting-container {
+    .greeting {
         min-height: 40px;
         font-size: 32px;
     }
 
-    .greeting {
+    .greeting-text {
         padding: 5px;
     }
 

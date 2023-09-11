@@ -1,27 +1,104 @@
 import './audio-player.js';
 let settings = {
     options: {
+        player: 'true',
+        weather: 'true',
         time: 'true',
         date: 'true',
         greeting: 'true',
-        weather: 'true',
         quote: 'true',
-        player: 'true',
+        todo: 'true',
         language: 'en',
         background: 'github',
-        todo: 'true',
     },
     tag: '',
 };
 
-const greeting = document.querySelector('.greeting');
-
-/*1. Times and calendar */
 const time = document.querySelector('.time');
 const dateCalendar = document.querySelector('.date');
 time.textContent = '';
 const date = new Date();
 
+const name = document.querySelector('.name');
+const greeting = document.querySelector('.greeting-text');
+
+const slideNext = document.querySelector('.slide-next');
+const slidePrev = document.querySelector('.slide-prev');
+const githubRadio = document.getElementById('check-github');
+const flickrRadio = document.getElementById('check-flickr');
+const unsplashRadio = document.getElementById('check-unsplash');
+
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
+const city = document.querySelector('.city');
+
+const quote = document.querySelector('.quote-text');
+const changeQuote = document.querySelector('.change-quote');
+const author = document.querySelector('.author');
+const settingBtn = document.querySelector('.settings-icon');
+const overlay = document.querySelector('.overlay');
+const inputToDo = document.querySelector('.input-todo');
+const optionsName = document.querySelectorAll('.options-name');
+const toDoText = document.querySelectorAll('.todo-text');
+const progressTasks = document.querySelector('.progress-tasks');
+const settingsBlock = document.querySelector('.settings-block');
+const swichBlocks = document.querySelectorAll('.swich-block');
+let indicator = document.querySelectorAll('.indicator');
+const toDoBtn = document.querySelector('.todo-icon');
+const toDoBlock = document.querySelector('.todo-block');
+const addButton = document.querySelector('.add-todo-btn');
+const toDoTaskList = document.querySelector('.todo-task-list');
+const titleProgressTasks = document.querySelector('.title-progress-tasks');
+const tagName = document.querySelector('.background-tag');
+
+const optionProperties = [
+    'player',
+    'weather',
+    'time',
+    'date',
+    'greeting',
+    'quote',
+    'todo',
+];
+let optionKey = [];
+let onToggle = [];
+let offToggle = [];
+
+/*Local storage ---------------------------------------------------------------------------------------------------------------------------------------*/
+function setLocalStorage() {
+    localStorage.setItem('name', name.value);
+    // localStorage.setItem('todo-list', JSON.stringify(toDoTaskList));
+    // localStorage.setItem('progressed-todo', JSON.stringify(progressTasks));
+    localStorage.setItem('settings', JSON.stringify(settings));
+}
+
+function getLocalStorage() {
+    if (localStorage.getItem('name')) {
+        name.value = localStorage.getItem('name');
+    }
+
+    if (localStorage.getItem('settings')) {
+        settings = JSON.parse(localStorage.getItem('settings'));
+        toggleIndicator();
+        tagName.value = settings.tag;
+    }
+
+    // if (localStorage.getItem('todo-list')) {
+    //     toDoTaskList = JSON.parse(localStorage.getItem('todo-list'));
+    // }
+
+    // if (localStorage.getItem('progressed-todo')) {
+    //     progressTasks= JSON.parse(localStorage.getItem('progressed-todo'));
+    // }
+}
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
+
+/*1. Times and calendar */
 function showTime() {
     const date = new Date();
     time.textContent = date.toLocaleTimeString();
@@ -53,7 +130,6 @@ function getDate(lang) {
 }
 
 /*2. Greeting */
-const name = document.querySelector('.name');
 name.placeholder =
     settings.options.language === 'en' ? '[Enter name]' : "[Введіть ім'я]";
 
@@ -82,27 +158,7 @@ function getTimeOfDay() {
     }
 }
 
-function setLocalStorage() {
-    localStorage.setItem('name', name.value);
-}
-
-window.addEventListener('beforeunload', setLocalStorage);
-
-function getLocalStorage() {
-    if (localStorage.getItem('name')) {
-        name.value = localStorage.getItem('name');
-    }
-}
-
-window.addEventListener('load', getLocalStorage);
-
 /*3. Image slider */
-const slideNext = document.querySelector('.slide-next');
-const slidePrev = document.querySelector('.slide-prev');
-
-const githubRadio = document.getElementById('check-github');
-const flickrRadio = document.getElementById('check-flickr');
-const unsplashRadio = document.getElementById('check-unsplash');
 
 function getRandomNum(n) {
     return ~~(Math.random() * n + 1);
@@ -157,13 +213,6 @@ slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
 
 /*4. Weather widget */
-const weatherIcon = document.querySelector('.weather-icon');
-const temperature = document.querySelector('.temperature');
-const weatherDescription = document.querySelector('.weather-description');
-const wind = document.querySelector('.wind');
-const humidity = document.querySelector('.humidity');
-const city = document.querySelector('.city');
-
 function setLocalStorageCity(cityName) {
     localStorage.setItem('city', cityName);
 }
@@ -176,7 +225,7 @@ const savedCity = getLocalStorageCity();
 
 if (savedCity) {
     city.value = capitalizeFirstLetter(savedCity);
-    getWeather(savedCity);
+    getWeather(city.value);
 } else {
     city.value = settings.options.language === 'en' ? 'Minsk' : 'Минск';
     getWeather(city.value);
@@ -214,23 +263,18 @@ async function getWeather(cityName) {
 }
 
 function showTheWeather() {
-    const cityName = city.value;
-    getWeather(cityName);
-    setLocalStorageCity(cityName);
+    getWeather(city.value);
+    setLocalStorageCity(city.value);
 }
 
 city.addEventListener('change', showTheWeather);
 
 /* 5. Quote of the day*/
-const quote = document.querySelector('.quote');
-const changeQuote = document.querySelector('.change-quote');
-const author = document.querySelector('.author');
-
 async function getQuotes() {
     let res =
         settings.options.language === 'en'
-            ? await fetch('./js/data.json')
-            : await fetch('./js/datauk.json');
+            ? await fetch('./src/data.json')
+            : await fetch('./src/datauk.json');
     const data = await res.json();
     const randomQuote = getRandomNum(49);
     const { quote: text, author: authorName } = data[randomQuote];
@@ -242,13 +286,31 @@ getQuotes();
 changeQuote.addEventListener('click', getQuotes);
 
 /*8. Application translation -----------------------------------------------------------------------------------------------------------------*/
-const inputToDo = document.querySelector('.input-todo');
-const optionsName = document.querySelectorAll('.options-name');
-const toDoText = document.querySelectorAll('.todo-text');
-const progressTasks = document.querySelector('.progress-tasks');
 function changeSettingsLanguage() {
-    const ukSettings = ['Мова', 'Плеєр', 'Погода', 'Час', 'Дата', 'Привітання', 'Цитата дня', 'Список справ','Фонове зображення', 'Тег'];
-    const enSettings = ['Language','Player','Weather', 'Time', 'Date', 'Greeting', 'Quote', 'ToDo', 'Background Image', 'Tag'];
+    const ukSettings = [
+        'Мова',
+        'Плеєр',
+        'Погода',
+        'Час',
+        'Дата',
+        'Привітання',
+        'Цитата дня',
+        'Список справ',
+        'Фонове зображення',
+        'Тег',
+    ];
+    const enSettings = [
+        'Language',
+        'Player',
+        'Weather',
+        'Time',
+        'Date',
+        'Greeting',
+        'Quote',
+        'ToDo',
+        'Background Image',
+        'Tag',
+    ];
 
     const enToDo = ['ToDo list', 'Add', 'Your progress'];
     const ukToDo = ['Список справ', 'Додати', 'Ваш прогрес'];
@@ -309,7 +371,6 @@ function changeSettingsLanguage() {
 }
 
 /*9. Getting the background image from the API*/
-const tagName = document.querySelector('.background-tag');
 async function getUnsplashImg(tag) {
     const img = new Image();
     const newTag = tag || getTimeOfDay();
@@ -347,7 +408,7 @@ async function getFlickrImg(tag) {
     const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=487d107c09bb457a77c8ebf709668f30&tags=${newTag}&extras=url_l&format=json&nojsoncallback=1`;
     const result = await fetch(url);
     const data = await result.json();
-    
+
     if (data.stat === 'fail') {
         alert(
             settings.options.language === 'en'
@@ -358,9 +419,9 @@ async function getFlickrImg(tag) {
         try {
             if (data.photos.photo.length > 0) {
                 let randomIndex = getRandomNum(data.photos.photo.length);
-                image.src = data.photos.photo[randomIndex].url_l; 
+                image.src = data.photos.photo[randomIndex].url_l;
             } else {
-                throw new Error("No photos found for this tag.");
+                throw new Error('No photos found for this tag.');
             }
         } catch {
             alert(
@@ -374,39 +435,50 @@ async function getFlickrImg(tag) {
     }
 
     image.onload = () => {
-        document.body.style.backgroundImage = `url('${data.photos.photo[getRandomNum(data.photos.photo.length)].url_l}')`;
+        document.body.style.backgroundImage = `url('${
+            data.photos.photo[getRandomNum(data.photos.photo.length)].url_l
+        }')`;
     };
-}     
+}
 
 function determineSelectedRadio() {
     if (githubRadio.checked) {
-      settings.options.background ='github';
-      document.querySelector('.tag-block').style.visibility ='hidden';
-      onloadImg();
+        settings.options.background = 'github';
+        document.querySelector('.tag-block').style.visibility = 'hidden';
+        onloadImg();
     } else if (flickrRadio.checked) {
-      settings.options.background ='flickr';
-      document.querySelector('.tag-block').style.visibility ='visible';
-      onloadImg();
+        settings.options.background = 'flickr';
+        document.querySelector('.tag-block').style.visibility = 'visible';
+        onloadImg();
     } else if (unsplashRadio.checked) {
-      settings.options.background ='unsplash';
-      document.querySelector('.tag-block').style.visibility ='visible';
-      onloadImg();
+        settings.options.background = 'unsplash';
+        document.querySelector('.tag-block').style.visibility = 'visible';
+        onloadImg();
     } else {
-      settings.options.background ='github';
-      document.querySelector('.tag-block').style.visibility ='hidden';
-      onloadImg();
+        settings.options.background = 'github';
+        document.querySelector('.tag-block').style.visibility = 'hidden';
+        onloadImg();
     }
-  }
-  
-  function checkedImgRadioBtn() {
-  githubRadio.addEventListener('change',determineSelectedRadio);
-    
-  flickrRadio.addEventListener('change',determineSelectedRadio);
-    
-  unsplashRadio.addEventListener('change',determineSelectedRadio);
-  }
-  
-  checkedImgRadioBtn()
+}
+
+function checkedImgRadioBtn() {
+    githubRadio.addEventListener('change', determineSelectedRadio);
+
+    flickrRadio.addEventListener('change', determineSelectedRadio);
+
+    unsplashRadio.addEventListener('change', determineSelectedRadio);
+}
+
+function saveCheckedBackground() {
+    settings.options.background === 'github'
+        ? (githubRadio.checked = true)
+        : settings.options.background === 'flickr'
+        ? (flickrRadio.checked = true)
+        : (unsplashRadio.checked = true);
+    determineSelectedRadio();
+}
+
+checkedImgRadioBtn();
 
 function searchByTag() {
     settings.tag = tagName.value;
@@ -419,13 +491,6 @@ tagName.addEventListener('keydown', (event) => {
 });
 
 /*10.Application settings------------------------------------------------------------*/
-const settingBtn = document.querySelector('.settings-icon');
-const overlay = document.querySelector('.overlay');
-const settingsBlock = document.querySelector('.settings-block');
-const swichBlocks = document.querySelectorAll('.swich-block');
-const indicator = document.querySelectorAll('.indicator');
-let onToggle = [];
-let offToggle = [];
 
 swichBlocks.forEach((swichBlock) => {
     onToggle.push(swichBlock.children[0]);
@@ -445,43 +510,54 @@ function closeAplications(block) {
 settingBtn.addEventListener('click', () => openAplications(settingsBlock));
 overlay.addEventListener('click', () => closeAplications(settingsBlock));
 
-
-
 function hideBlock(options, selector) {
-    document.querySelector(selector).style.visibility =
+    document.querySelector(`.${selector}`).style.visibility =
         options === 'true' ? 'visible' : 'hidden';
 }
 
-const selectors = ['.player', '.weather', '.time', '.date', '.greeting-container', '.quote-block', '.todo-list'];
+function changeSettingsOptions() {
+    indicator.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+            if (i === 0) {
+                settings.options.language =
+                    settings.options.language === 'en' ? 'uk' : 'en';
+                indicator[0].classList.toggle('active');
+                changeSettingsLanguage();
+            } else {
+                optionKey = optionProperties[i - 1];
+                settings.options[optionKey] =
+                    settings.options[optionKey] === 'true' ? 'false' : 'true';
+                btn.classList.toggle('active');
+                hideBlock(settings.options[optionKey], optionKey);
+                console.log(settings.options);
+            }
+            setLocalStorage();
+        });
+    });
+}
 
-indicator.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
+function toggleIndicator() {
 
-        const optionProperties = ['player','weather','time','date', 'greeting','quote','todo'];
-
+    indicator.forEach((btn, i) => {
         if (i === 0) {
-            settings.options.language = indicator[0].classList.contains('active')
-                ? 'uk'
-                : 'en';
+            settings.options.language === 'en'
+                ? indicator[0].classList.remove('active')
+                : indicator[0].classList.add('active');
             changeSettingsLanguage();
         } else {
-            const optionKey = optionProperties[i - 1];
-            settings.options[optionKey] = btn.classList.contains('active')
-                ? 'false'
-                : 'true';
-            hideBlock(settings.options[optionKey], selectors[i - 1]);
+            optionKey = optionProperties[i - 1];
+            settings.options[optionKey] === 'false'
+                ? btn.classList.add('active')
+                : btn.classList.remove('active');
+            hideBlock(settings.options[optionKey], optionKey);
         }
+        saveCheckedBackground();
     });
-});
+}
+
+changeSettingsOptions();
 
 /*11.Additional functionality. Todo list----------------------------------------------------------------------------------*/
-const toDoBtn = document.querySelector('.todo-icon');
-const toDoBlock = document.querySelector('.todo-block');
-const addButton = document.querySelector('.add-todo-btn');
-const toDoTaskList = document.querySelector('.todo-task-list');
-const titleProgressTasks = document.querySelector('.title-progress-tasks');
-
 function addTasks() {
     if (inputToDo.value === '') {
         alert(
@@ -500,12 +576,15 @@ function addTasks() {
     inputToDo.value = '';
     getCheckedTask();
     returnCheckedTask();
+    setLocalStorage();
+    getLocalStorage();
+    console.log(toDoTaskList);
 }
 
 function getCheckedTask() {
     toDoTaskList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
-            event.target.classList.toggle('checked');
+            event.target.classList.add('checked');
             titleProgressTasks.textContent =
                 settings.options.language === 'en'
                     ? 'Your progress'
@@ -514,13 +593,14 @@ function getCheckedTask() {
         } else if (event.target.tagName === 'SPAN') {
             event.target.parentElement.remove();
         }
+        getLocalStorage();
     });
 }
 
 function returnCheckedTask() {
     progressTasks.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
-            event.target.classList.toggle('checked');
+            event.target.classList.remove('checked');
             toDoTaskList.appendChild(event.target);
             if (progressTasks.childElementCount === 0)
                 titleProgressTasks.textContent = '';
@@ -529,21 +609,17 @@ function returnCheckedTask() {
             if (progressTasks.childElementCount === 0)
                 titleProgressTasks.textContent = '';
         }
+        getLocalStorage();
     });
 }
 
-addButton.addEventListener('click', addTasks);
-inputToDo.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') addTasks();
-});
+function getTodoList() {
+    addButton.addEventListener('click', addTasks);
+    inputToDo.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') addTasks();
+    });
+}
 
+getTodoList();
 toDoBtn.addEventListener('click', () => openAplications(toDoBlock));
 overlay.addEventListener('click', () => closeAplications(toDoBlock));
-
-// function setLocalStorage() {
-//     localStorage.setItem('todo', JSON.stringify(addTasks));
-// }
-
-// function getLocalStorage() {
-
-// }
