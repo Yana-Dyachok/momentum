@@ -326,10 +326,10 @@ body {
 .greeting {
     display: flex;
     flex-wrap: wrap;
-    justify-content: stretch;
+    justify-content:center;
     align-items: center;
     min-height: 40px;
-    width: 100vw;
+    width: 50vw;
     font-size: 40px;
 }
 

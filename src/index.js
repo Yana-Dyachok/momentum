@@ -185,8 +185,6 @@ function onloadImg() {
         : getFlickrImg(settings.tag);
 }
 
-onloadImg();
-
 function getSlideNext() {
     if (settings.options.background === 'github') {
         randomNum = randomNum < 20 ? randomNum + 1 : 1;
@@ -537,7 +535,6 @@ function changeSettingsOptions() {
 }
 
 function toggleIndicator() {
-
     indicator.forEach((btn, i) => {
         if (i === 0) {
             settings.options.language === 'en'
