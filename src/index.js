@@ -70,8 +70,9 @@ let offToggle = [];
 /*Local storage ---------------------------------------------------------------------------------------------------------------------------------------*/
 function setLocalStorage() {
     localStorage.setItem('name', name.value);
-    // localStorage.setItem('todo-list', JSON.stringify(toDoTaskList));
-    // localStorage.setItem('progressed-todo', JSON.stringify(progressTasks));
+    localStorage.setItem('todo-list', toDoTaskList.innerHTML);
+    localStorage.setItem('progressed-todo', progressTasks.innerHTML);
+    localStorage.setItem('title-progress', titleProgressTasks.textContent);
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
@@ -86,13 +87,21 @@ function getLocalStorage() {
         tagName.value = settings.tag;
     }
 
-    // if (localStorage.getItem('todo-list')) {
-    //     toDoTaskList = JSON.parse(localStorage.getItem('todo-list'));
-    // }
+    if (localStorage.getItem('title-progress')) {
+        titleProgressTasks.textContent = localStorage.getItem('title-progress');
+        getCheckedTask();
+        returnCheckedTask();
+    }
 
-    // if (localStorage.getItem('progressed-todo')) {
-    //     progressTasks= JSON.parse(localStorage.getItem('progressed-todo'));
-    // }
+    if (localStorage.getItem('todo-list')) {
+        toDoTaskList.innerHTML = localStorage.getItem('todo-list');
+        getCheckedTask();
+        returnCheckedTask();
+    }
+
+    if (localStorage.getItem('progressed-todo')) {
+        progressTasks.innerHTML = localStorage.getItem('progressed-todo');
+    }
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
@@ -571,11 +580,9 @@ function addTasks() {
         toDoTaskList.appendChild(task);
     }
     inputToDo.value = '';
+    setLocalStorage();
     getCheckedTask();
     returnCheckedTask();
-    setLocalStorage();
-    getLocalStorage();
-    console.log(toDoTaskList);
 }
 
 function getCheckedTask() {
@@ -587,10 +594,11 @@ function getCheckedTask() {
                     ? 'Your progress'
                     : 'Ваш прогрес';
             progressTasks.appendChild(event.target);
+            setLocalStorage();
         } else if (event.target.tagName === 'SPAN') {
             event.target.parentElement.remove();
+            setLocalStorage();
         }
-        getLocalStorage();
     });
 }
 
@@ -601,12 +609,13 @@ function returnCheckedTask() {
             toDoTaskList.appendChild(event.target);
             if (progressTasks.childElementCount === 0)
                 titleProgressTasks.textContent = '';
+            setLocalStorage();
         } else if (event.target.tagName === 'SPAN') {
             event.target.parentElement.remove();
             if (progressTasks.childElementCount === 0)
                 titleProgressTasks.textContent = '';
+            setLocalStorage();
         }
-        getLocalStorage();
     });
 }
 
