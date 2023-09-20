@@ -38,10 +38,16 @@ const city = document.querySelector('.city');
 const quote = document.querySelector('.quote-text');
 const changeQuote = document.querySelector('.change-quote');
 const author = document.querySelector('.author');
+
 const settingBtn = document.querySelector('.settings-icon');
 const overlay = document.querySelector('.overlay');
 const inputToDo = document.querySelector('.input-todo');
 const optionsName = document.querySelectorAll('.options-name');
+const optionProperties = ['player', 'weather', 'time', 'date', 'greeting', 'quote', 'todo'];
+let optionKey = [];
+let onToggle = [];
+let offToggle = [];
+
 const toDoText = document.querySelectorAll('.todo-text');
 const progressTasks = document.querySelector('.progress-tasks');
 const settingsBlock = document.querySelector('.settings-block');
@@ -53,19 +59,6 @@ const addButton = document.querySelector('.add-todo-btn');
 const toDoTaskList = document.querySelector('.todo-task-list');
 const titleProgressTasks = document.querySelector('.title-progress-tasks');
 const tagName = document.querySelector('.background-tag');
-
-const optionProperties = [
-    'player',
-    'weather',
-    'time',
-    'date',
-    'greeting',
-    'quote',
-    'todo',
-];
-let optionKey = [];
-let onToggle = [];
-let offToggle = [];
 
 /*Local storage ---------------------------------------------------------------------------------------------------------------------------------------*/
 function setLocalStorage() {
@@ -294,30 +287,8 @@ changeQuote.addEventListener('click', getQuotes);
 
 /*8. Application translation -----------------------------------------------------------------------------------------------------------------*/
 function changeSettingsLanguage() {
-    const ukSettings = [
-        'Мова',
-        'Плеєр',
-        'Погода',
-        'Час',
-        'Дата',
-        'Привітання',
-        'Цитата дня',
-        'Список справ',
-        'Фонове зображення',
-        'Тег',
-    ];
-    const enSettings = [
-        'Language',
-        'Player',
-        'Weather',
-        'Time',
-        'Date',
-        'Greeting',
-        'Quote',
-        'ToDo',
-        'Background Image',
-        'Tag',
-    ];
+    const ukSettings = ['Мова', 'Плеєр', 'Погода', 'Час', 'Дата', 'Привітання', 'Цитата дня', 'Список справ', 'Фонове зображення', 'Тег'];
+    const enSettings = ['Language', 'Player', 'Weather', 'Time', 'Date', 'Greeting', 'Quote', 'ToDo', 'Background Image', 'Tag'];
 
     const enToDo = ['ToDo list', 'Add', 'Your progress'];
     const ukToDo = ['Список справ', 'Додати', 'Ваш прогрес'];
