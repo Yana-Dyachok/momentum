@@ -1,4 +1,4 @@
-import './audio-player.js';
+import './utils/audio-player.js';
 let settings = {
     options: {
         player: 'true',
@@ -43,7 +43,15 @@ const settingBtn = document.querySelector('.settings-icon');
 const overlay = document.querySelector('.overlay');
 const inputToDo = document.querySelector('.input-todo');
 const optionsName = document.querySelectorAll('.options-name');
-const optionProperties = ['player', 'weather', 'time', 'date', 'greeting', 'quote', 'todo'];
+const optionProperties = [
+    'player',
+    'weather',
+    'time',
+    'date',
+    'greeting',
+    'quote',
+    'todo',
+];
 let optionKey = [];
 let onToggle = [];
 let offToggle = [];
@@ -273,8 +281,8 @@ city.addEventListener('change', showTheWeather);
 async function getQuotes() {
     let res =
         settings.options.language === 'en'
-            ? await fetch('./src/data.json')
-            : await fetch('./src/datauk.json');
+            ? await fetch('./utils/data.json')
+            : await fetch('./utils/datauk.json');
     const data = await res.json();
     const randomQuote = getRandomNum(49);
     const { quote: text, author: authorName } = data[randomQuote];
@@ -287,8 +295,30 @@ changeQuote.addEventListener('click', getQuotes);
 
 /*8. Application translation -----------------------------------------------------------------------------------------------------------------*/
 function changeSettingsLanguage() {
-    const ukSettings = ['Мова', 'Плеєр', 'Погода', 'Час', 'Дата', 'Привітання', 'Цитата дня', 'Список справ', 'Фонове зображення', 'Тег'];
-    const enSettings = ['Language', 'Player', 'Weather', 'Time', 'Date', 'Greeting', 'Quote', 'ToDo', 'Background Image', 'Tag'];
+    const ukSettings = [
+        'Мова',
+        'Плеєр',
+        'Погода',
+        'Час',
+        'Дата',
+        'Привітання',
+        'Цитата дня',
+        'Список справ',
+        'Фонове зображення',
+        'Тег',
+    ];
+    const enSettings = [
+        'Language',
+        'Player',
+        'Weather',
+        'Time',
+        'Date',
+        'Greeting',
+        'Quote',
+        'ToDo',
+        'Background Image',
+        'Tag',
+    ];
 
     const enToDo = ['ToDo list', 'Add', 'Your progress'];
     const ukToDo = ['Список справ', 'Додати', 'Ваш прогрес'];
