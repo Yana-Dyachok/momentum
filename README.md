@@ -22,5 +22,7 @@ This app is created with:
 * [OpenWeather API](https://openweathermap.org/api)
 * [Unsplash API](https://unsplash.com/developers)
 * [Flickr API](https://www.flickr.com/services/developer)
+* 
   [Сlick if you want to see my work](https://yana-dyachok.github.io/momentum/src/index.html)
+  
   ![App screenshot](https://github.com/Yana-Dyachok/momentum/assets/97878430/97732061-ac27-44a5-b97f-411e20ef4016)
