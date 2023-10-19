@@ -140,9 +140,6 @@ function getDate(lang) {
 }
 
 /*2. Greeting */
-name.placeholder =
-    settings.options.language === 'en' ? '[Enter name]' : "[Введіть ім'я]";
-
 function showGreeting(enDay, ukDay) {
     greeting.textContent =
         settings.options.language === 'en' ? `Good ${enDay}` : ukDay;
@@ -345,7 +342,7 @@ function changeSettingsLanguage() {
                     ? ''
                     : enToDo[toDoText.length - 1];
         });
-
+        name.placeholder ='[Enter name]';
         inputToDo.placeholder = 'Add task to be done';
         tagName.placeholder = 'Write your tag';
     } else {
@@ -369,6 +366,7 @@ function changeSettingsLanguage() {
                     ? ''
                     : ukToDo[toDoText.length - 1];
         });
+        name.placeholder ="[Введіть ім'я]";
         inputToDo.placeholder = 'Додайте завдання, для виконання';
         tagName.placeholder = 'Напишіть свій тег';
     }
