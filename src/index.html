@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="assets/logo/favicon.ico" rel="shortcut icon">
+        <link rel="stylesheet" href="./css/owfont-regular.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>momentum</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="player">
+                <div class="player-controls">
+                    <button class="play-prev player-icon"></button>
+                    <button class="play player-icon"></button>
+                    <button class="play-next player-icon"></button>
+                </div>
+                <div class="progress-block">
+                  <p class="name-song"></p>
+                  <div class="slider-container">
+                    <div class="current-time">0:00</div>
+                    <div class="timeline">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="total-duration">00:00</div>         
+                  </div>
+                </div>
+                  <div class="volume-container">
+                    <div class="switch-sound"></div>
+                    <div class="volume-bar">
+                      <div class="volume-bar-progressed"></div>
+                    </div>
+                  </div>
+                <ul class="play-list"></ul>
+            </div>
+            <div class="weather">
+                <input type="text" class="city" />
+                <i class="weather-icon owf"></i>
+                <div class="weather-error"></div>
+                <div class="description-container">
+                    <span class="temperature"></span>
+                    <span class="weather-description"></span>
+                </div>
+                <div class="wind"></div>
+                <div class="humidity"></div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="slider-icons">
+                <button class="slide-prev slider-icon"></button>
+                <button class="slide-next slider-icon"></button>
+            </div>
+            <time class="time"></time>
+            <date class="date"></date>
+            <div class="greeting">
+                <span class="greeting-text"></span>
+                <input class="name" type="text" placeholder="[Enter name]">
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="quote">
+                <button class="change-quote"></button>
+                <div>
+                    <div class="quote-text"></div>
+                    <div class="author"></div>
+                </div>
+            </div>
+            <div class="aplications-block">
+                <div class="todo">
+                    <div class="todo-icon"></div>
+                    <div class="todo-block">
+                      <h4 class="todo-text title-todo">ToDo list</h4>
+                      <div class="input-todo-block">
+                        <input class="input-todo" maxlength="30" type="text" placeholder="Add task to be done">
+                        <button class="add-todo-btn todo-text">Add</button>
+                      </div>
+                      <ul class="todo-task-list"></ul>
+                      <span class="title-progress-tasks todo-text"></span>
+                      <ul class="progress-tasks"></ul>
+                    </div>
+                  </div>
+                <ul class="footer-list">
+                    <li class="footer-item">
+                        <a
+                            class="footer-link"
+                            href="https://github.com/Yana-Dyachok"
+                            target="_blank"
+                        >
+                            <img
+                                class="icone-footer"
+                                src="./assets/logo/github_apps_platform_icon_176071.svg"
+                                alt="github-icone"
+                                width="30"
+                                height="30"
+                            >
+                        </a>
+                    </li>
+                    <li class="footer-item">© 2023</li>
+                    <li class="footer-item">
+                        <a class="footer-link" href="https://rs.school/js/" target="_blank">
+                            <img
+                                class="icone-footer"
+                                src="./assets/logo/logo-rss.svg"
+                                alt="rs-school"
+                                width="60"
+                                height="30"
+                            >
+                        </a>
+                    </li>
+                </ul>
+                <div class="sittings-container">
+                    <div class="settings-icon"></div>
+                    <div class="settings">
+                        <div class="settings-block">
+                            <div class="settings-items">
+                                <h4 class="options-name">Language</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">En</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Uk</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">Player</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">Weather</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">Time</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                              <h4 class="options-name">Date</h4>
+                              <div class="swich-block">
+                                  <p class="toggle-items">On</p>
+                                  <div class="toggle-block">
+                                      <i class="indicator"></i>
+                                  </div>
+                                  <p class="toggle-items">Off</p>
+                              </div>
+                          </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">Greeting</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">Quote</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                                <h4 class="options-name">ToDo</h4>
+                                <div class="swich-block">
+                                    <p class="toggle-items">On</p>
+                                    <div class="toggle-block">
+                                        <i class="indicator"></i>
+                                    </div>
+                                    <p class="toggle-items">Off</p>
+                                </div>
+                            </div>
+              
+                            <div class="settings-items">
+                              <h4 class="options-name">Background source</h4>
+                              <div class="background-options">
+                                <div class="background-options-item">
+                                  <input type="radio" class="radio" name="background-source" value="github" id="check-github">
+                                  <span class="radio-text">GitHub</span>
+                                </div>
+                                <div class="background-options-item">
+                                  <input type="radio" class="radio" name="background-source" value="flickr" id="check-flickr">
+                                  <span class="radio-text">Flickr</span>
+                                </div>
+                                <div class="background-options-item">
+                                  <input type="radio" class="radio" name="background-source" value="unsplash" id="check-unsplash">
+                                  <span class="radio-text">Unsplash </span>
+                                </div>
+                              </div>
+                            </div>
+              
+                              <div class="settings-items tag-block">
+                                <h4 class="options-name">Tag</h4>
+                                   <input class="background-tag" name="background-tag" maxlength="20" placeholder="Write your tag">
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+        </footer>
+    <div class="overlay"></div>
+        <script type="module" src="./index.js"></script>
+    </body>
+</html>
